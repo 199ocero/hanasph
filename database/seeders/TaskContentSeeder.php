@@ -48,6 +48,7 @@ class TaskContentSeeder extends Seeder
                 'scenario_intro' => $data['scenario_intro'],
                 'xp_reward' => $data['xp_reward'] ?? 100,
                 'is_gentle_opener' => $data['is_gentle_opener'] ?? false,
+                'is_intro' => $data['is_intro'] ?? false,
                 'onboarding_entry_key' => $data['onboarding_entry_key'] ?? null,
                 'category' => $data['category'],
                 'ai_grading_enabled' => $data['ai_grading_enabled'] ?? false,
@@ -60,6 +61,7 @@ class TaskContentSeeder extends Seeder
                 [
                     'client_message' => $beatData['client_message'],
                     'scaffold_hint' => $beatData['scaffold_hint'] ?? null,
+                    'tagalog_tip' => $beatData['tagalog_tip'] ?? null,
                 ],
             );
 

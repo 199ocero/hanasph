@@ -9,8 +9,8 @@ return [
     |
     | Maps the skills a user selects during onboarding (users.va_skills) to the
     | skill_key of one or more courses that should be badged "Recommended for
-    | you" in the sidebar catalog. Every course remains startable regardless —
-    | this only drives recommendations, never access.
+    | you" in the sidebar catalog. Every course remains startable regardless,
+    | so this only drives recommendations, never access.
     |
     */
 
@@ -42,42 +42,42 @@ return [
             'subtitle' => 'Captions, community, and content that clients love.',
             'icon' => 'Megaphone',
             'order' => 1,
-            'focus' => 'social media management — captions, comment replies, and content calendars',
+            'focus' => 'social media management: captions, comment replies, and content calendars',
         ],
         'admin-va' => [
             'title' => 'Admin / Executive VA',
             'subtitle' => 'Inboxes, calendars, docs, and clean spreadsheets.',
             'icon' => 'ClipboardList',
             'order' => 2,
-            'focus' => 'executive admin — professional emails, meeting notes, scheduling, and spreadsheet clean-up',
+            'focus' => 'executive admin: professional emails, meeting notes, scheduling, and spreadsheet clean-up',
         ],
         'customer-support-va' => [
             'title' => 'Customer Support VA',
             'subtitle' => 'Calm, clear replies that keep customers happy.',
             'icon' => 'Headset',
             'order' => 3,
-            'focus' => 'customer support — ticket replies, refunds, de-escalation, and macros',
+            'focus' => 'customer support: ticket replies, refunds, de-escalation, and macros',
         ],
         'content-writing-va' => [
             'title' => 'Content Writing VA',
             'subtitle' => 'Emails, blogs, and product copy that convert.',
             'icon' => 'PenLine',
             'order' => 4,
-            'focus' => 'content writing — marketing emails, blog intros, and product descriptions',
+            'focus' => 'content writing: marketing emails, blog intros, and product descriptions',
         ],
         'ecommerce-va' => [
             'title' => 'E-commerce VA',
             'subtitle' => 'Listings, inventory, and order operations.',
             'icon' => 'ShoppingCart',
             'order' => 5,
-            'focus' => 'e-commerce support — product listings, inventory sheets, and order handling',
+            'focus' => 'e-commerce support: product listings, inventory sheets, and order handling',
         ],
         'data-research-va' => [
             'title' => 'Data & Research VA',
             'subtitle' => 'Clean data and useful research, fast.',
             'icon' => 'Table',
             'order' => 6,
-            'focus' => 'data entry and research — structured spreadsheets, lead lists, and research summaries',
+            'focus' => 'data entry and research: structured spreadsheets, lead lists, and research summaries',
         ],
     ],
 

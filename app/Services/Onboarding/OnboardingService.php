@@ -47,19 +47,31 @@ class OnboardingService
             $tasks = Task::query()->orderBy('order')->get();
 
             $isExistingVa = $answers['va_motivation'] === 'already_va';
-            $startOrder = $isExistingVa ? 3 : 1;
 
+            // Existing VAs skip the beginner intro tasks; beginners start on them.
+            $introCount = $tasks->where('is_intro', true)->count();
+            $startOrder = $isExistingVa ? $introCount + 1 : 1;
+
+            // The challenge answer decides how far an existing VA's path is
+            // pre-unlocked, and which scenario they open on.
             $entryTask = $this->resolveEntryTask($tasks, $answers['va_challenge'], $startOrder);
             $entryOrder = $entryTask->order;
+
+            // Beginners are gated behind the intro tasks: all three intros start
+            // unlocked (doable in any order), while every real Foundation task
+            // stays locked until the intros are cleared (ProgressionService opens
+            // the first real task once all intros are passed). Existing VAs get
+            // their personalised span pre-unlocked as before.
+            $unlockCeiling = $isExistingVa ? $entryOrder : $introCount;
 
             foreach ($tasks as $task) {
                 $status = UserTaskProgress::STATUS_LOCKED;
                 $skipped = false;
 
-                if ($isExistingVa && $task->is_gentle_opener) {
+                if ($isExistingVa && ($task->is_intro || $task->is_gentle_opener)) {
                     $status = UserTaskProgress::STATUS_PASSED;
                     $skipped = true;
-                } elseif ($task->order >= $startOrder && $task->order <= $entryOrder) {
+                } elseif ($task->order >= $startOrder && $task->order <= $unlockCeiling) {
                     $status = UserTaskProgress::STATUS_UNLOCKED;
                 }
 
@@ -73,7 +85,11 @@ class OnboardingService
                 );
             }
 
-            return $entryTask;
+            // Beginners open on the first intro task; existing VAs open on the
+            // scenario their challenge answer routed them to.
+            return $isExistingVa
+                ? $entryTask
+                : ($tasks->firstWhere('order', 1) ?? $entryTask);
         });
     }
 

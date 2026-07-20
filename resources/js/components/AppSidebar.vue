@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Route, Sparkles } from '@lucide/vue';
+import {
+    BookOpen,
+    ClipboardList,
+    Headset,
+    Megaphone,
+    PenLine,
+    Route,
+    ShoppingCart,
+    Sparkles,
+    Table,
+} from '@lucide/vue';
+import type { LucideIcon } from '@lucide/vue';
 import { computed } from 'vue';
 import {
     index as coursesIndex,
@@ -22,25 +33,46 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
-const mainNavItems: NavItem[] = [
+const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
+
+// Matches the `icon` values authored per course in config/skills.php.
+const courseIcons: Record<string, LucideIcon> = {
+    Megaphone,
+    ClipboardList,
+    Headset,
+    PenLine,
+    ShoppingCart,
+    Table,
+};
+
+function courseIcon(icon: string | null): LucideIcon {
+    return (icon && courseIcons[icon]) || BookOpen;
+}
+
+// Foundations stays active on the dashboard (the map) and while playing a task.
+const mainNavItems = computed<NavItem[]>(() => [
     {
-        title: 'Track',
+        title: 'Foundations',
         href: dashboard(),
         icon: Route,
+        isActive: isCurrentUrl(dashboard()) || isCurrentOrParentUrl('/tasks'),
     },
-];
+]);
 
 const page = usePage();
 const progression = computed(() => page.props.progression);
 const catalog = computed(() => page.props.catalog ?? []);
 const levelProgress = computed(() => {
     const p = progression.value;
+
     if (!p || p.xpForNextLevel === 0) {
         return 0;
     }
+
     return (p.xpIntoLevel / p.xpForNextLevel) * 100;
 });
 </script>
@@ -66,7 +98,11 @@ const levelProgress = computed(() => {
                 <SidebarGroupLabel>Courses</SidebarGroupLabel>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton as-child>
+                        <SidebarMenuButton
+                            as-child
+                            :is-active="isCurrentUrl(coursesIndex.url())"
+                            class="transition-colors [&_svg]:transition-colors data-[active=true]:[&_svg]:text-primary"
+                        >
                             <Link :href="coursesIndex.url()">
                                 <BookOpen />
                                 <span>All courses</span>
@@ -77,13 +113,22 @@ const levelProgress = computed(() => {
                         v-for="course in catalog"
                         :key="course.skillKey"
                     >
-                        <SidebarMenuButton as-child :tooltip="course.title">
+                        <SidebarMenuButton
+                            as-child
+                            :tooltip="course.title"
+                            :is-active="
+                                isCurrentOrParentUrl(
+                                    courseShow.url({ course: course.skillKey }),
+                                )
+                            "
+                            class="transition-colors [&_svg]:transition-colors data-[active=true]:[&_svg]:text-primary"
+                        >
                             <Link
                                 :href="
                                     courseShow.url({ course: course.skillKey })
                                 "
                             >
-                                <BookOpen />
+                                <component :is="courseIcon(course.icon)" />
                                 <span>{{ course.title }}</span>
                                 <Sparkles
                                     v-if="course.recommended"

@@ -3,6 +3,8 @@
 use App\Models\Beat;
 use App\Models\Option;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\UserTaskProgress;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -72,6 +74,22 @@ function makeTask(int $order = 1, int $beats = 2, array $attributes = []): Task
     }
 
     return $task->load('beats.options');
+}
+
+/**
+ * Mark the entire Foundation track passed for a user, so Skill courses unlock.
+ * Ensures at least one Foundation task exists to pass.
+ */
+function completeFoundation(User $user): void
+{
+    if (Task::count() === 0) {
+        makeTask(1);
+    }
+
+    Task::all()->each(fn (Task $task) => UserTaskProgress::updateOrCreate(
+        ['user_id' => $user->id, 'task_id' => $task->id],
+        ['status' => UserTaskProgress::STATUS_PASSED, 'passed_at' => now()],
+    ));
 }
 
 /**

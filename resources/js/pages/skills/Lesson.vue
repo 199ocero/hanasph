@@ -4,13 +4,19 @@ import { ArrowLeft, CircleCheckBig, Sparkles } from '@lucide/vue';
 import { computed, onUnmounted, watch } from 'vue';
 import { show as courseShow } from '@/actions/App/Http/Controllers/SkillCourseController';
 import { store as submitAction } from '@/actions/App/Http/Controllers/SubmissionController';
+import AiAssist from '@/components/AiAssist.vue';
 import CritiquePanel from '@/components/CritiquePanel.vue';
+import LessonTip from '@/components/LessonTip.vue';
 import SubmissionUploader from '@/components/SubmissionUploader.vue';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { dashboard } from '@/routes';
-import type { LessonSubmission, SubmissionFormat } from '@/types/skills';
+import type {
+    AiLeverage,
+    LessonSubmission,
+    SubmissionFormat,
+} from '@/types/skills';
 
 const props = defineProps<{
     course: { skillKey: string; title: string };
@@ -22,6 +28,8 @@ const props = defineProps<{
         acceptedFormats: SubmissionFormat[];
         difficulty: string;
         xpReward: number;
+        tip: string | null;
+        aiLeverage: AiLeverage | null;
     };
     passed: boolean;
     submission: LessonSubmission | null;
@@ -118,6 +126,24 @@ onUnmounted(stopPolling);
             </CardContent>
         </Card>
 
+        <!-- Coaching tip -->
+        <LessonTip
+            v-if="lesson.tip"
+            :tip="lesson.tip"
+            class="animate-in delay-100 duration-500 fill-mode-both fade-in slide-in-from-bottom-2"
+        />
+
+        <!-- How to leverage AI on this task -->
+        <div
+            v-if="lesson.aiLeverage"
+            class="animate-in delay-150 duration-500 fill-mode-both fade-in slide-in-from-bottom-2"
+        >
+            <AiAssist
+                :approach="lesson.aiLeverage.approach"
+                :prompt="lesson.aiLeverage.prompt"
+            />
+        </div>
+
         <!-- Reviewing skeleton -->
         <Card v-if="isQueued">
             <CardContent class="space-y-3">
@@ -148,7 +174,7 @@ onUnmounted(stopPolling);
             v-else-if="isFailed"
             class="rounded-xl border border-border bg-muted/40 p-4 text-sm text-muted-foreground"
         >
-            We couldn't review that submission — please try submitting again.
+            We couldn't review that submission. Please try submitting again.
         </div>
 
         <!-- Uploader (hidden only while a review is in flight) -->

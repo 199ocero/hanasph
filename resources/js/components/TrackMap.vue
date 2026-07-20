@@ -12,7 +12,7 @@ defineProps<{
         <!-- Connecting spine -->
         <span
             aria-hidden="true"
-            class="absolute top-4 bottom-4 left-[1.85rem] w-px bg-border"
+            class="absolute top-4 bottom-4 left-[2.375rem] w-px bg-border"
         />
         <li v-for="node in nodes" :key="node.order" class="relative">
             <TrackNode :node="node" />

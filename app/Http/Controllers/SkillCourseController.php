@@ -7,6 +7,7 @@ use App\Models\SkillLesson;
 use App\Models\SkillSubmission;
 use App\Models\UserSkillProgress;
 use App\Services\Skills\SkillCatalog;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -20,17 +21,23 @@ class SkillCourseController extends Controller
     {
         return Inertia::render('skills/Index', [
             'courses' => $catalog->forIndex($request->user()),
+            'foundationComplete' => $request->user()->hasCompletedFoundation(),
         ]);
     }
 
     /**
      * A course's lesson ladder with the user's progress.
      */
-    public function show(Request $request, SkillCourse $course): Response
+    public function show(Request $request, SkillCourse $course): Response|RedirectResponse
     {
         abort_unless($course->isPublished(), 404);
 
         $user = $request->user();
+
+        // Skill courses stay locked until the whole Foundation is finished.
+        if (! $user->hasCompletedFoundation()) {
+            return redirect()->route('skills.index');
+        }
 
         $progress = UserSkillProgress::firstOrCreate(
             ['user_id' => $user->id, 'skill_course_id' => $course->id],

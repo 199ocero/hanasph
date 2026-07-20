@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { BookOpen, CircleCheckBig, Sparkles } from '@lucide/vue';
+import { BookOpen, CircleCheckBig, Lock, Sparkles } from '@lucide/vue';
 import { computed } from 'vue';
 import { show as courseShow } from '@/actions/App/Http/Controllers/SkillCourseController';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { dashboard } from '@/routes';
@@ -10,6 +11,7 @@ import type { IndexCourse } from '@/types/skills';
 
 const props = defineProps<{
     courses: IndexCourse[];
+    foundationComplete: boolean;
 }>();
 
 defineOptions({
@@ -18,6 +20,7 @@ defineOptions({
     },
 });
 
+const locked = computed(() => !props.foundationComplete);
 const recommended = computed(() => props.courses.filter((c) => c.recommended));
 const others = computed(() => props.courses.filter((c) => !c.recommended));
 </script>
@@ -33,10 +36,22 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                 Skill courses
             </h1>
             <p class="text-sm text-muted-foreground">
-                Practice real VA deliverables and get them reviewed. Start any
-                course — the ones matched to your skills are highlighted.
+                Practice real VA deliverables and get them reviewed. The ones
+                matched to your skills are highlighted.
             </p>
         </div>
+
+        <Alert
+            v-if="locked"
+            class="animate-in border-primary/30 duration-500 fill-mode-both fade-in slide-in-from-bottom-2"
+        >
+            <Lock class="size-4" />
+            <AlertTitle>Finish the Foundation first</AlertTitle>
+            <AlertDescription>
+                These courses unlock once you've finished the entire Foundation
+                track. Keep going, you'll be here soon.
+            </AlertDescription>
+        </Alert>
 
         <section v-if="recommended.length" class="space-y-3">
             <div class="flex items-center gap-2">
@@ -48,13 +63,24 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                 </h2>
             </div>
             <div class="grid gap-3 sm:grid-cols-2">
-                <Link
+                <component
+                    :is="locked ? 'div' : Link"
                     v-for="course in recommended"
                     :key="course.skillKey"
-                    :href="courseShow.url({ course: course.skillKey })"
+                    :href="
+                        locked
+                            ? undefined
+                            : courseShow.url({ course: course.skillKey })
+                    "
+                    :aria-disabled="locked || undefined"
                 >
                     <Card
-                        class="h-full border-primary/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                        :class="[
+                            'h-full border-primary/30 transition-all duration-200',
+                            locked
+                                ? 'cursor-not-allowed opacity-60'
+                                : 'hover:-translate-y-0.5 hover:shadow-lg',
+                        ]"
                     >
                         <CardContent class="space-y-2">
                             <div
@@ -65,8 +91,12 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                                 >
                                     <BookOpen class="size-5" />
                                 </div>
+                                <Badge v-if="locked" variant="secondary">
+                                    <Lock class="size-3" />
+                                    Locked
+                                </Badge>
                                 <Badge
-                                    v-if="course.completed"
+                                    v-else-if="course.completed"
                                     variant="secondary"
                                 >
                                     <CircleCheckBig
@@ -88,7 +118,7 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                             </p>
                         </CardContent>
                     </Card>
-                </Link>
+                </component>
             </div>
         </section>
 
@@ -100,13 +130,24 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                 All courses
             </h2>
             <div class="grid gap-3 sm:grid-cols-2">
-                <Link
+                <component
+                    :is="locked ? 'div' : Link"
                     v-for="course in others"
                     :key="course.skillKey"
-                    :href="courseShow.url({ course: course.skillKey })"
+                    :href="
+                        locked
+                            ? undefined
+                            : courseShow.url({ course: course.skillKey })
+                    "
+                    :aria-disabled="locked || undefined"
                 >
                     <Card
-                        class="h-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                        :class="[
+                            'h-full transition-all duration-200',
+                            locked
+                                ? 'cursor-not-allowed opacity-60'
+                                : 'hover:-translate-y-0.5 hover:shadow-lg',
+                        ]"
                     >
                         <CardContent class="space-y-2">
                             <div
@@ -117,8 +158,12 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                                 >
                                     <BookOpen class="size-5" />
                                 </div>
+                                <Badge v-if="locked" variant="secondary">
+                                    <Lock class="size-3" />
+                                    Locked
+                                </Badge>
                                 <Badge
-                                    v-if="course.completed"
+                                    v-else-if="course.completed"
                                     variant="secondary"
                                 >
                                     <CircleCheckBig
@@ -140,7 +185,7 @@ const others = computed(() => props.courses.filter((c) => !c.recommended));
                             </p>
                         </CardContent>
                     </Card>
-                </Link>
+                </component>
             </div>
         </section>
     </div>

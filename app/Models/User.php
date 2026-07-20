@@ -88,4 +88,25 @@ class User extends Authenticatable implements PasskeyUser
     {
         return $this->onboarded_at !== null;
     }
+
+    /**
+     * Whether the user has passed EVERY Foundation task. Skill courses stay
+     * locked until the whole Foundation is finished (the 3 intro tasks alone
+     * are not enough). Skipped tasks (existing VAs) count as passed. Returns
+     * false when no Foundation tasks exist (locked by default).
+     */
+    public function hasCompletedFoundation(): bool
+    {
+        $total = Task::count();
+
+        if ($total === 0) {
+            return false;
+        }
+
+        $passed = $this->taskProgress()
+            ->where('status', UserTaskProgress::STATUS_PASSED)
+            ->count();
+
+        return $passed === $total;
+    }
 }

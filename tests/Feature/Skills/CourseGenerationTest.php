@@ -38,6 +38,11 @@ function makeLesson(int $order, string $difficulty): array
         'accepted_formats' => ['text'],
         'difficulty' => $difficulty,
         'xp_reward' => 100,
+        'tip' => "Focus on the one thing that matters most for lesson {$order}.",
+        'ai_leverage' => [
+            'approach' => 'Draft with AI, then refine it in your own words.',
+            'prompt' => 'Act as a VA and draft the deliverable for {client}.',
+        ],
     ];
 }
 
@@ -52,6 +57,41 @@ it('generates a draft course that is unpublished pending review', function () {
         ->and($course->lessons()->count())->toBe(3);
 
     expect(SkillLesson::whereNotNull('published_at')->count())->toBe(0);
+});
+
+it('persists the learner-facing tip and ai_leverage on each lesson', function () {
+    AuthorSkillCourseAgent::fake([authoredCourse()]);
+
+    $course = app(CourseGenerator::class)->generate('admin-va');
+
+    $course->lessons->each(function (SkillLesson $lesson) {
+        expect(trim((string) $lesson->tip))->not->toBe('')
+            ->and($lesson->ai_leverage)->toBeArray()
+            ->and(trim((string) $lesson->ai_leverage['approach']))->not->toBe('')
+            ->and(trim((string) $lesson->ai_leverage['prompt']))->not->toBe('');
+    });
+});
+
+it('rejects a course whose lesson is missing a tip', function () {
+    $bad = [makeLesson(1, 'easy'), makeLesson(2, 'medium'), makeLesson(3, 'hard')];
+    $bad[1]['tip'] = '   ';
+    AuthorSkillCourseAgent::fake([authoredCourse($bad)]);
+
+    expect(fn () => app(CourseGenerator::class)->generate('admin-va'))
+        ->toThrow(InvalidArgumentException::class);
+
+    expect(SkillCourse::count())->toBe(0);
+});
+
+it('rejects a course whose lesson is missing an ai_leverage prompt', function () {
+    $bad = [makeLesson(1, 'easy'), makeLesson(2, 'medium'), makeLesson(3, 'hard')];
+    $bad[2]['ai_leverage']['prompt'] = '';
+    AuthorSkillCourseAgent::fake([authoredCourse($bad)]);
+
+    expect(fn () => app(CourseGenerator::class)->generate('admin-va'))
+        ->toThrow(InvalidArgumentException::class);
+
+    expect(SkillCourse::count())->toBe(0);
 });
 
 it('rejects a course whose lesson has too few rubric criteria', function () {

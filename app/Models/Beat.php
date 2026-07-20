@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $order
  * @property string $client_message
  * @property string|null $scaffold_hint
+ * @property string|null $tagalog_tip
  * @property-read Task $task
  * @property-read Collection<int, Option> $options
  */
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'order',
     'client_message',
     'scaffold_hint',
+    'tagalog_tip',
 ])]
 class Beat extends Model
 {

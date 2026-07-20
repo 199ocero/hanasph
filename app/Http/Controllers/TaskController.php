@@ -44,6 +44,9 @@ class TaskController extends Controller
                 'order' => $beat->order,
                 'clientMessage' => $beat->client_message,
                 'scaffoldHint' => $user->needs_scaffolding ? $beat->scaffold_hint : null,
+                // Shown to everyone (unlike scaffoldHint), so Filipino trainees
+                // always get a native-language nudge on each beat.
+                'tagalogTip' => $beat->tagalog_tip,
                 // Never leak is_correct / diagnostic / lesson to the client.
                 'options' => $beat->options->map(fn ($option) => [
                     'id' => $option->id,

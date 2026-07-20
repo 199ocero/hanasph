@@ -90,6 +90,11 @@ class CourseGenerator
                 'accepted_formats' => array_values(array_unique((array) ($lesson['accepted_formats'] ?? []))),
                 'difficulty' => (string) ($lesson['difficulty'] ?? ''),
                 'xp_reward' => (int) ($lesson['xp_reward'] ?? 0),
+                'tip' => (string) ($lesson['tip'] ?? ''),
+                'ai_leverage' => [
+                    'approach' => (string) ($lesson['ai_leverage']['approach'] ?? ''),
+                    'prompt' => (string) ($lesson['ai_leverage']['prompt'] ?? ''),
+                ],
             ])
             ->sortBy('order')
             ->values()
@@ -151,6 +156,14 @@ class CourseGenerator
 
             if ($lesson['xp_reward'] < 1) {
                 $errors[] = "{$label}: xp_reward must be positive.";
+            }
+
+            if (trim($lesson['tip']) === '') {
+                $errors[] = "{$label}: a learner-facing tip is required.";
+            }
+
+            if (trim($lesson['ai_leverage']['approach']) === '' || trim($lesson['ai_leverage']['prompt']) === '') {
+                $errors[] = "{$label}: ai_leverage needs both an approach and a starter prompt.";
             }
         }
 

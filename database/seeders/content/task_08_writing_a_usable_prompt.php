@@ -1,7 +1,7 @@
 <?php
 
 /*
- * QUALITY BAR — every wrong option must satisfy all five:
+ * QUALITY BAR: every wrong option must satisfy all five:
  *  1. Plausible: a real beginner could genuinely pick it.
  *  2. Distinctly wrong: fails for a DIFFERENT reason than the other wrongs.
  *  3. Diagnostic is ONE defensible sentence a working VA would agree with.
@@ -11,9 +11,9 @@
 
 return [
     'slug' => 'writing-a-usable-prompt',
-    'order' => 8,
+    'order' => 11,
     'title' => 'Getting AI to do it right',
-    'client_persona' => 'Dennis — runs a small online gadget shop',
+    'client_persona' => 'Dennis runs a small online gadget shop',
     'scenario_intro' => 'Dennis sells phone accessories online and just asked you to draft a promo email for his weekend sale. He wants something he can send to customers, not a rough sketch he has to fix.',
     'xp_reward' => 125,
     'onboarding_entry_key' => null,
@@ -24,27 +24,28 @@ return [
             'order' => 1,
             'client_message' => "Hey! Can you whip up an email about our weekend sale? 20% off all cases and chargers, code WEEKEND20, ends Sunday midnight. Send it to me and I'll blast it to the customer list. Slammed today, thanks!!",
             'scaffold_hint' => null,
+            'tagalog_tip' => 'Kumpleto naman yung details na binigay ni Dennis: discount, code, at deadline. Isipin mo kung paano mo ipapasok lahat yun sa AI para hindi generic yung lalabas na email.',
             'options' => [
                 [
                     'order' => 1,
-                    'body' => 'Type a quick prompt — "write an email about our weekend sale" — then copy whatever the AI gives back and send that straight to Dennis.',
+                    'body' => 'Type a quick prompt like "write an email about our weekend sale," then copy whatever the AI gives back and send that straight to Dennis.',
                     'is_correct' => false,
                     'diagnostic' => 'A one-line prompt with no context gives you a generic email that could be for any shop, and shipping it raw makes that the client\'s problem.',
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-context-is-the-work',
                         'title' => 'The context you give is the work',
-                        'body' => "AI can only be as specific as your prompt. Ask it to \"write an email about our sale\" and it has no idea who the shop is, who's reading, or what makes this sale worth opening — so it fills the gaps with bland filler that sounds like every other email.\n\nThe useful facts already live in the client's message: the products, the discount, the code, the deadline. Feeding those in isn't extra effort, it *is* the job. A thin prompt just moves the real work — adding the specifics — onto the client after they read the flat result.\n\nWhoever supplies the context gets output worth sending. Skip it and you've handed AI a blank page and hoped.",
+                        'body' => "AI can only be as specific as your prompt. Ask it to \"write an email about our sale\" and it has no idea who the shop is, who's reading, or what makes this sale worth opening, so it fills the gaps with bland filler that sounds like every other email.\n\nThe useful facts already live in the client's message: the products, the discount, the code, the deadline. Feeding those in isn't extra effort, it *is* the job. A thin prompt just shoves the real work of adding the specifics onto the client after they read the flat result.\n\nWhoever supplies the context gets output worth sending. Skip it and you've handed AI a blank page and hoped.",
                     ],
                 ],
                 [
                     'order' => 2,
-                    'body' => 'Write one huge prompt cramming in everything — make it formal but also playful, long but keep it short, list every product in the shop, offer five backup discount codes, three subject lines, maybe a little poem — and use whatever comes out.',
+                    'body' => 'Write one huge prompt cramming in everything: make it formal but also playful, long but keep it short, list every product in the shop, offer five backup discount codes, three subject lines, maybe a little poem. Then just use whatever comes out.',
                     'is_correct' => false,
                     'diagnostic' => 'Piling in contradictory instructions like "formal but playful" and "long but short" pulls the output in every direction, so it lands as a muddled mess.',
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-clarity-beats-volume',
                         'title' => 'More instructions is not a clearer instruction',
-                        'body' => "Beginners often think a better prompt means a bigger one, so they stuff in every idea at once. But when you ask for opposite things — formal and playful, detailed and short — the AI can't satisfy both, so it splits the difference and satisfies neither.\n\nGood direction is specific, not maximal. Pick one tone, one goal, one clear format, and the few facts that matter. Everything you add beyond that either repeats itself or fights something else you said.\n\nAim your prompt at a single clear target. A focused ask produces a focused draft; a crowded ask produces confusion you then have to untangle by hand.",
+                        'body' => "Beginners often think a better prompt means a bigger one, so they stuff in every idea at once. But when you ask for opposite things, like formal and playful or detailed and short, the AI can't satisfy both, so it splits the difference and satisfies neither.\n\nGood direction is specific rather than maximal. Pick one tone, one goal, one clear format, and the few facts that matter. Everything you add beyond that either repeats itself or fights something else you said.\n\nAim your prompt at a single clear target. A focused ask produces a focused draft. A crowded ask just produces confusion you then have to untangle by hand.",
                     ],
                 ],
                 [
@@ -56,25 +57,26 @@ return [
                 ],
                 [
                     'order' => 4,
-                    'body' => 'Skip the AI — it never sounds right anyway — and write the whole email yourself from scratch, even if it eats up your afternoon.',
+                    'body' => 'Skip the AI, it never sounds right anyway, and write the whole email yourself from scratch, even if it eats up your afternoon.',
                     'is_correct' => false,
                     'diagnostic' => 'You spent hours doing by hand what a well-aimed prompt would have drafted in a minute, so the client waited longer for no extra quality.',
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-use-the-tool-you-have',
                         'title' => 'Don\'t grind out what a good prompt would nail',
-                        'body' => "AI \"never sounds right\" is usually a story people tell after feeding it a lazy prompt and getting a lazy result. The tool wasn't the problem; the direction was. Give it real context and it drafts in seconds what would take you an afternoon.\n\nYour value isn't proving you can do everything unassisted — it's turning the client's request around quickly and well. A task where AI clearly helps is exactly where you should reach for it, then spend your time reviewing and refining rather than typing from zero.\n\nWork slowly by hand when the tool genuinely can't help. Don't do it to avoid learning the tool.",
+                        'body' => "AI \"never sounds right\" is usually a story people tell after feeding it a lazy prompt and getting a lazy result. The tool wasn't the problem. The direction was. Give it real context and it drafts in seconds what would take you an afternoon.\n\nYour value isn't in proving you can do everything unassisted. It's in turning the client's request around quickly and well. A task where AI clearly helps is exactly where you should reach for it, then spend your time reviewing and refining rather than typing from zero.\n\nWork slowly by hand when the tool genuinely can't help. Don't do it just to avoid learning the tool.",
                     ],
                 ],
             ],
         ],
         [
             'order' => 2,
-            'client_message' => 'Close! But it reads a bit stiff and corporate — my customers know me, it should feel warmer. Also you left out that orders over ₱1,000 ship free, which is honestly the biggest draw. Can you fix?',
+            'client_message' => 'Close! But it reads a bit stiff and corporate, my customers know me so it should feel warmer. Also you left out that orders over ₱1,000 ship free, which is honestly the biggest draw. Can you fix?',
             'scaffold_hint' => null,
+            'tagalog_tip' => 'May dalawang klarong feedback si Dennis: warmer tone at yung nakalimutang free shipping. Isipin mo kung saan mo dapat ayusin yun para hindi ka na paulit-ulit gagawa nito sa susunod.',
             'options' => [
                 [
                     'order' => 1,
-                    'body' => 'Update the prompt with the exact fixes — "Make the tone warmer and casual, like a message to a regular customer, and include that orders over ₱1,000 ship free" — keep everything else the same, and re-run it.',
+                    'body' => 'Update the prompt with the exact fixes, adding "Make the tone warmer and casual, like a message to a regular customer, and include that orders over ₱1,000 ship free," keep everything else the same, and re-run it.',
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
@@ -83,16 +85,16 @@ return [
                     'order' => 2,
                     'body' => 'Leave the prompt as it is and just hit generate a few more times, hoping one of the versions happens to come out warmer and mentions the free shipping.',
                     'is_correct' => false,
-                    'diagnostic' => 'Re-rolling the same prompt only shuffles the wording — it can\'t add a fact you never gave it or reliably shift a tone you never asked for.',
+                    'diagnostic' => 'Re-rolling the same prompt only shuffles the wording, so it can\'t add a fact you never gave it or reliably shift a tone you never asked for.',
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-refine-dont-reroll',
                         'title' => 'Fix the instruction, not the dice',
-                        'body' => "When output is off, the tempting move is to regenerate and hope the next one is better. But the AI is answering the same prompt each time, so you're just spinning a wheel — it can't invent the free-shipping fact you never mentioned, no matter how many tries.\n\nTreat a wrong result as feedback about your prompt. The client told you exactly what's missing: warmer tone, and the shipping line. Feed those specific corrections back in and the next version fixes both on purpose, not by luck.\n\nRe-rolling is gambling. Refining is steering. One wastes attempts; the other closes the gap deliberately.",
+                        'body' => "When output is off, the tempting move is to regenerate and hope the next one is better. But the AI is answering the same prompt each time, so you're just spinning a wheel. It can't invent the free-shipping fact you never mentioned, no matter how many tries.\n\nTreat a wrong result as feedback about your prompt. The client told you exactly what's missing: a warmer tone and the shipping line. Feed those specific corrections back in and the next version fixes both on purpose instead of by luck.\n\nRe-rolling is just gambling, while refining actually steers the result. One wastes your attempts, and the other closes the gap deliberately.",
                     ],
                 ],
                 [
                     'order' => 3,
-                    'body' => "Leave the prompt alone and just rewrite the AI's output yourself by hand — warm up the wording and paste in the shipping line manually.",
+                    'body' => "Leave the prompt alone and just rewrite the AI's output yourself by hand, warming up the wording and pasting in the shipping line manually.",
                     'is_correct' => false,
                     'diagnostic' => 'Hand-patching this one output leaves your prompt still broken, so the next time you need a similar email you\'re back to fixing it manually all over again.',
                     'lesson' => [
@@ -103,13 +105,13 @@ return [
                 ],
                 [
                     'order' => 4,
-                    'body' => "Decide it's basically fine — send Dennis the current stiff version and just mention the free-shipping detail to him in a separate note.",
+                    'body' => "Decide it's basically fine, send Dennis the current stiff version, and just mention the free-shipping detail to him in a separate note.",
                     'is_correct' => false,
                     'diagnostic' => 'You shipped a draft you already know misses the tone and the single most important selling point, leaving the client to fix what he just asked you to fix.',
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-close-enough-isnt-done',
                         'title' => '"Close enough" is still not what was asked',
-                        'body' => "Once something is nearly right, there's a strong pull to call it done and move on. But the client named two specific problems, and \"close enough\" means handing back work that still has both — with the biggest selling point sitting in a side note instead of in the email that goes to customers.\n\nThe gap between close and correct is where your value lives. Anyone can produce a rough draft; the VA who's worth keeping delivers the version that's actually ready to use, especially when the fixes are small and clearly known.\n\nIf you already know what's wrong, that's not the moment to ship — it's the moment to fix.",
+                        'body' => "Once something is nearly right, there's a strong pull to call it done and move on. But the client named two specific problems, and \"close enough\" means handing back work that still has both, with the biggest selling point sitting in a side note instead of in the email that goes to customers.\n\nThe gap between close and correct is where your value lives. Anyone can produce a rough draft. The VA who's worth keeping delivers the version that's actually ready to use, especially when the fixes are small and clearly known.\n\nIf you already know what's wrong, this isn't the moment to ship it. It's the moment to fix it.",
                     ],
                 ],
             ],
@@ -118,16 +120,17 @@ return [
             'order' => 3,
             'client_message' => "That's perfect now, love the tone 🙌 Just send it out to the whole customer list for me!",
             'scaffold_hint' => null,
+            'tagalog_tip' => 'Approved na ni Dennis yung email, pero isipin mo kung ano pa ang dapat mong tiyakin bago ito sumabog sa buong customer list. Mahirap nang bawiin pag mali na ang nasend sa lahat.',
             'options' => [
                 [
                     'order' => 1,
-                    'body' => 'Great — schedule it to the entire list right away, exactly as the AI wrote it.',
+                    'body' => 'Great, schedule it to the entire list right away, exactly as the AI wrote it.',
                     'is_correct' => false,
                     'diagnostic' => 'Blasting AI-written copy to real customers without a read-through risks a wrong code, price, or date going out to everyone at once.',
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-you-own-the-output',
                         'title' => 'AI drafts it; you own it',
-                        'body' => "AI can state a discount code, a price, or a deadline with total confidence and still get it wrong. Once that email reaches customers, the mistake is out in the world under the client's name — and \"the AI wrote it\" is no defence.\n\nAnything AI produces is a draft you're responsible for, not a finished product you can forward untouched. The moment before it goes to real people is exactly when a human has to check that the facts are actually correct.\n\nThe tool does the typing. You do the vouching. Never let its confidence stand in for your review.",
+                        'body' => "AI can state a discount code, a price, or a deadline with total confidence and still get it wrong. Once that email reaches customers, the mistake is out in the world under the client's name, and \"the AI wrote it\" is no defence.\n\nAnything AI produces is a draft you're responsible for, not a finished product you can forward untouched. The moment before it goes to real people is exactly when a human has to check that the facts are actually correct.\n\nThe tool does the typing, but you're the one vouching for it. Never let its confidence stand in for your own review.",
                     ],
                 ],
                 [
@@ -138,7 +141,7 @@ return [
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-approved-means-ship',
                         'title' => 'Approved is the finish line',
-                        'body' => "When something is good and signed off, more tinkering isn't diligence — it's delay. This is a weekend sale; every hour the email sits unsent is an hour of the promotion wasted, and the client already said it's perfect.\n\nPerfectionism after approval quietly overrides the client's decision. They judged it ready; re-running the prompt for a version they didn't ask for substitutes your taste for their go-ahead and costs them time on a deadline.\n\nKnow when to stop. Once the client approves, your job is to ship it cleanly, not to keep polishing past the point of value.",
+                        'body' => "When something is good and signed off, more tinkering isn't diligence. It's just delay. This is a weekend sale, and every hour the email sits unsent is an hour of the promotion wasted, especially when the client already said it's perfect.\n\nPerfectionism after approval quietly overrides the client's decision. They judged it ready, so re-running the prompt for a version they didn't ask for substitutes your taste for their go-ahead and costs them time on a deadline.\n\nKnow when to stop. Once the client approves, your job is to ship it cleanly rather than keep polishing past the point of value.",
                     ],
                 ],
                 [
@@ -149,12 +152,12 @@ return [
                     'lesson' => [
                         'slug' => 'writing-a-usable-prompt-tool-stays-behind-the-scenes',
                         'title' => 'The tool is yours to use, not to advertise',
-                        'body' => "How you produced the work is your business as the VA; what reaches the customer is the client's brand voice. Stamping \"written by AI\" on a friendly promo email breaks the personal tone the client specifically wanted and raises a question no customer was asking.\n\nUsing AI well is like using any tool — a good calculator or a spellchecker doesn't get a credit line. What matters is that the output is accurate and sounds like the client. Deciding whether to mention AI at all is the client's call, not a footnote you add on your own.\n\nDeliver clean, correct work in the client's voice. Keep the machinery behind the scenes unless they ask otherwise.",
+                        'body' => "How you produced the work is your business as the VA, while what reaches the customer is the client's brand voice. Stamping \"written by AI\" on a friendly promo email breaks the personal tone the client specifically wanted and raises a question no customer was asking.\n\nUsing AI well is like using any other tool. A good calculator or a spellchecker doesn't get a credit line. What matters is that the output is accurate and sounds like the client. Deciding whether to mention AI at all is the client's call, and it isn't a footnote you add on your own.\n\nDeliver clean, correct work in the client's voice. Keep the machinery behind the scenes unless they ask otherwise.",
                     ],
                 ],
                 [
                     'order' => 4,
-                    'body' => "Read it through once as a customer would — check the code, the discount, the deadline, and the free-shipping figure are all correct against Dennis's numbers — then send. Note to Dennis that you double-checked the details before it went out.",
+                    'body' => "Read it through once as a customer would, checking that the code, the discount, the deadline, and the free-shipping figure are all correct against Dennis's numbers, then send. Note to Dennis that you double-checked the details before it went out.",
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,

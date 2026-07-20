@@ -20,7 +20,7 @@ const props = defineProps<{
 
 defineOptions({
     layout: {
-        breadcrumbs: [{ title: 'Track', href: dashboard() }],
+        breadcrumbs: [{ title: 'Foundations', href: dashboard() }],
     },
 });
 
@@ -46,7 +46,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="Your Track" />
+    <Head title="Foundations" />
 
     <div class="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 p-4">
         <!-- Player header -->
@@ -67,7 +67,7 @@ onMounted(() => {
                         <h1
                             class="font-display text-xl font-semibold text-foreground"
                         >
-                            Your VA Track
+                            Your VA Foundations
                         </h1>
                         <StreakCounter
                             v-if="progression"
@@ -76,7 +76,7 @@ onMounted(() => {
                     </div>
                     <p class="text-sm text-muted-foreground">
                         {{ stats.passed }} of {{ stats.total }} client scenarios
-                        passed — keep going.
+                        passed. Keep going.
                     </p>
                     <XpBar
                         v-if="progression"

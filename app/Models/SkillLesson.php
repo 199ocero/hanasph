@@ -21,6 +21,8 @@ use Illuminate\Support\Carbon;
  * @property array<int, string> $accepted_formats
  * @property string $difficulty
  * @property int $xp_reward
+ * @property string|null $tip
+ * @property array{approach: string, prompt: string}|null $ai_leverage
  * @property Carbon|null $published_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -36,6 +38,8 @@ use Illuminate\Support\Carbon;
     'accepted_formats',
     'difficulty',
     'xp_reward',
+    'tip',
+    'ai_leverage',
     'published_at',
 ])]
 class SkillLesson extends Model
@@ -59,6 +63,7 @@ class SkillLesson extends Model
         return [
             'rubric' => 'array',
             'accepted_formats' => 'array',
+            'ai_leverage' => 'array',
             'published_at' => 'datetime',
         ];
     }

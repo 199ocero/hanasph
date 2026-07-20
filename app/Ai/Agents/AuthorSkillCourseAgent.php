@@ -48,8 +48,23 @@ class AuthorSkillCourseAgent implements Agent, HasStructuredOutput
         - difficulty: "easy", "medium", or "hard". Difficulty must not decrease as
           the order increases.
         - xp_reward: 100 for easy, 150 for medium, 200 for hard.
+        - tip: one or two sentences of concrete, encouraging coaching for the
+          trainee. Point at the one thing that most often separates a good
+          submission from a weak one. Speak to the trainee directly.
+        - ai_leverage: how to sensibly use an AI chat tool on this task. Provide:
+          - approach: one sentence on the smart way to use AI here, and where the
+            trainee still has to add their own judgement (for example, draft
+            options with AI then pick and humanise one).
+          - prompt: a ready-to-adapt starter prompt the trainee can paste into
+            ChatGPT or Claude. Write it as a reusable template with curly-brace
+            placeholders they fill in, like {product}, {client_name}, or {tone}.
 
-        Keep it grounded, warm, and specific to real VA work — no fluff.
+        Keep it grounded, warm, and specific to real VA work, with no fluff.
+
+        Writing style for every string you output (titles, briefs, rubric text):
+        - Write plainly, the way a real mentor would explain the task.
+        - Never use em dashes. Use commas, periods, or separate sentences instead.
+        - Avoid rule-of-three lists and "not X, but Y" / "isn't X; it's Y" phrasing.
         PROMPT;
     }
 
@@ -77,6 +92,11 @@ class AuthorSkillCourseAgent implements Agent, HasStructuredOutput
                     )->required(),
                     'difficulty' => $schema->string()->enum(['easy', 'medium', 'hard'])->required(),
                     'xp_reward' => $schema->integer()->min(1)->required(),
+                    'tip' => $schema->string()->required(),
+                    'ai_leverage' => $schema->object(fn (JsonSchema $schema): array => [
+                        'approach' => $schema->string()->required(),
+                        'prompt' => $schema->string()->required(),
+                    ])->required(),
                 ])
             )->required(),
         ];

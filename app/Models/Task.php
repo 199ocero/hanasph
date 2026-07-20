@@ -19,6 +19,7 @@ use Illuminate\Support\Carbon;
  * @property string $scenario_intro
  * @property int $xp_reward
  * @property bool $is_gentle_opener
+ * @property bool $is_intro
  * @property string|null $onboarding_entry_key
  * @property string $category
  * @property bool $ai_grading_enabled
@@ -34,6 +35,7 @@ use Illuminate\Support\Carbon;
     'scenario_intro',
     'xp_reward',
     'is_gentle_opener',
+    'is_intro',
     'onboarding_entry_key',
     'category',
     'ai_grading_enabled',
@@ -50,6 +52,7 @@ class Task extends Model
     {
         return [
             'is_gentle_opener' => 'boolean',
+            'is_intro' => 'boolean',
             'ai_grading_enabled' => 'boolean',
         ];
     }

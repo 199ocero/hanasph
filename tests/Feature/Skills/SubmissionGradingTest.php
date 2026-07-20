@@ -205,6 +205,8 @@ it('serves an uploaded file only to its owner', function () {
 });
 
 it('never leaks the rubric or reference notes to the lesson page', function () {
+    completeFoundation($this->user);
+
     $this->actingAs($this->user)
         ->get(route('skills.lessons.show', ['course' => $this->course, 'lesson' => $this->l1]))
         ->assertOk()

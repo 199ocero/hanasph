@@ -27,6 +27,11 @@ export type CourseLesson = {
     state: LessonState;
 };
 
+export type AiLeverage = {
+    approach: string;
+    prompt: string;
+};
+
 export type SubmissionFormat = 'text' | 'image' | 'file' | 'link';
 
 export type SubmissionStatus = 'queued' | 'graded' | 'failed';

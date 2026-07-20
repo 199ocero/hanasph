@@ -29,8 +29,8 @@ it('shows the track with node statuses for an onboarded user', function () {
         ->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('Dashboard')
-            ->has('nodes', 20)
-            ->where('stats.total', 20)
+            ->has('nodes', 23)
+            ->where('stats.total', 23)
             ->where('stats.passed', 0)
         );
 });

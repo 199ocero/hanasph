@@ -30,6 +30,11 @@ class SkillLessonFactory extends Factory
             'accepted_formats' => ['text'],
             'difficulty' => 'easy',
             'xp_reward' => 100,
+            'tip' => 'Lead with the one detail that matters most, then keep it short.',
+            'ai_leverage' => [
+                'approach' => 'Draft options with AI, then pick and humanise the best one yourself.',
+                'prompt' => 'Act as a VA and draft {deliverable} for {client}. Keep it short and warm.',
+            ],
             'published_at' => null,
         ];
     }

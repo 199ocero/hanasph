@@ -1,7 +1,7 @@
 <?php
 
 /*
- * QUALITY BAR — every wrong option must satisfy all five:
+ * QUALITY BAR: every wrong option must satisfy all five:
  *  1. Plausible: a real beginner could genuinely pick it.
  *  2. Distinctly wrong: fails for a DIFFERENT reason than the other wrongs.
  *  3. Diagnostic is ONE defensible sentence a working VA would agree with.
@@ -11,10 +11,10 @@
 
 return [
     'slug' => 'one-clarifying-question',
-    'order' => 7,
+    'order' => 10,
     'title' => 'The one question worth asking',
-    'client_persona' => 'Marco — runs a small coffee shop and fires off requests in a hurry',
-    'scenario_intro' => 'Marco owns a busy coffee shop and messages between orders, so his asks arrive short and vague. Guess wrong and you build the wrong thing; ask too much and you become one more chore on his day. The skill is knowing the single question worth his time.',
+    'client_persona' => 'Marco runs a small coffee shop and fires off requests in a hurry',
+    'scenario_intro' => 'Marco owns a busy coffee shop and messages between orders, so his asks arrive short and vague. Guess wrong and you build the wrong thing. Ask too many questions and you turn into one more chore on his day. The trick is knowing the single question actually worth his time.',
     'xp_reward' => 125,
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
@@ -24,6 +24,7 @@ return [
             'order' => 1,
             'client_message' => 'Hey can you put together a report for my meeting Thursday? Would help a lot. Thanks!',
             'scaffold_hint' => null,
+            'tagalog_tip' => "Sobrang vague pa nung 'report' na hinihingi ni Marco, wag ka munang mag-assume agad ng format o laman. Isipin mo kung ano yung isang tanong na talaga mong kailangan para hindi masayang oras mo sa maling output.",
             'options' => [
                 [
                     'order' => 1,
@@ -33,18 +34,18 @@ return [
                     'lesson' => [
                         'slug' => 'one-clarifying-question-dont-build-on-a-guess',
                         'title' => 'A confident guess still builds the wrong thing',
-                        'body' => "\"A report\" could be a one-page summary for the bank, a slide for two partners, or a quick numbers email — wildly different things. Picking one silently and building it feels decisive, but if you guessed wrong you've spent hours producing something Marco can't use.\n\nInitiative isn't guessing; it's knowing which unknown actually changes the outcome and clearing it before you invest the work. Filling a real gap with an assumption isn't confidence — it's a gamble with your own time.\n\nWhen a genuinely ambiguous detail decides what you build, resolve it first. Effort spent on the wrong target isn't effort the client values.",
+                        'body' => "\"A report\" could be a one-page summary for the bank, a slide for two partners, or a quick numbers email. Those are wildly different things. Picking one silently and building it feels decisive, but if you guessed wrong you've spent hours producing something Marco can't use.\n\nInitiative isn't the same as guessing. It's knowing which unknown actually changes the outcome and clearing that up before you invest the work. Filling a real gap with an assumption isn't confidence. It's a gamble with your own time.\n\nWhen a genuinely ambiguous detail decides what you build, resolve it first. Effort spent on the wrong target isn't effort the client values.",
                     ],
                 ],
                 [
                     'order' => 2,
-                    'body' => 'Sure! Quick questions: What format — PDF, slides, or printed? How many pages? What date range of data? Should I include charts? What font and colours? Do you want a cover page? Portrait or landscape?',
+                    'body' => 'Sure! Quick questions: What format, PDF, slides, or printed? How many pages? What date range of data? Should I include charts? What font and colours? Do you want a cover page? Portrait or landscape?',
                     'is_correct' => false,
                     'diagnostic' => 'You buried Marco in eight questions, several of which you could reasonably decide yourself, turning your ask into a chore.',
                     'lesson' => [
                         'slug' => 'one-clarifying-question-dont-bury-them',
                         'title' => 'Every question you ask is a task you assign',
-                        'body' => "A long list of questions feels thorough, but to a busy client it's a to-do list you just handed back. Half of those — fonts, cover page, portrait vs. landscape — are things a competent VA simply decides. Asking them signals you can't move without hand-holding.\n\nReserve questions for what genuinely blocks you and what only the client can answer. Everything you can reasonably choose yourself, choose — and mention your choice, don't request permission for it.\n\nThe goal is the fewest questions that unblock you, not the most complete questionnaire. One sharp question respects the client's time; eight scattered ones spend it.",
+                        'body' => "A long list of questions feels thorough, but to a busy client it's a to-do list you just handed back. Half of those, like fonts, cover page, and portrait vs. landscape, are things a competent VA simply decides. Asking them signals you can't move without hand-holding.\n\nReserve questions for what genuinely blocks you and what only the client can answer. Everything you can reasonably choose yourself, choose it, then mention your choice rather than requesting permission for it.\n\nThe goal is the fewest questions that unblock you, not the most complete questionnaire. One sharp question respects the client's time. Eight scattered ones just spend it.",
                     ],
                 ],
                 [
@@ -55,12 +56,12 @@ return [
                     'lesson' => [
                         'slug' => 'one-clarifying-question-do-the-thinking-first',
                         'title' => 'Ask a sharp question, not an open one',
-                        'body' => "\"What exactly do you mean?\" dumps the entire problem back on the client. It shows you haven't sorted out what's actually unclear, so now they have to structure the whole request from scratch — the thinking they were paying you to do.\n\nA sharp question proves you've already narrowed things down: \"Who's the meeting with, so I pitch it at the right level?\" That's easy to answer in a word and shows you're most of the way there. A vague one says you haven't started.\n\nDo the analysis first, isolate the one thing you truly can't infer, and ask that. The quality of your question tells the client how much thinking you've already done.",
+                        'body' => "\"What exactly do you mean?\" dumps the entire problem back on the client. It shows you haven't sorted out what's actually unclear, so now they have to structure the whole request from scratch, which is the thinking they were paying you to do.\n\nA sharp question proves you've already narrowed things down: \"Who's the meeting with, so I pitch it at the right level?\" That's easy to answer in a word and shows you're most of the way there. A vague one says you haven't started.\n\nDo the analysis first, isolate the one thing you truly can't infer, and ask that. The quality of your question tells the client how much thinking you've already done.",
                     ],
                 ],
                 [
                     'order' => 4,
-                    'body' => "Happy to! One thing so I aim it right: who's the meeting with and what's it deciding — the bank, your business partners, staff? Meanwhile I'll draft it as a one-page summary of last month's numbers, which I can expand if you need more.",
+                    'body' => "Happy to! One thing so I aim it right: who's the meeting with and what's it deciding, the bank, your business partners, staff? Meanwhile I'll draft it as a one-page summary of last month's numbers, which I can expand if you need more.",
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
@@ -69,55 +70,57 @@ return [
         ],
         [
             'order' => 2,
-            'client_message' => "Good q! It's for my two business partners — we're deciding whether to open a second branch. So make it convincing.",
+            'client_message' => "Good q! It's for my two business partners, we're deciding whether to open a second branch. So make it convincing.",
             'scaffold_hint' => null,
+            'tagalog_tip' => 'Alam mo na ngayon kung para kanino at para saan yung report, so may sapat ka nang panimulan. Isipin mo kung anong details ang kaya mo nang desisyunan mag-isa, at kung anong detalye naman ang bawal mong hulaan.',
             'options' => [
                 [
                     'order' => 1,
-                    'body' => 'Got it! Before I start — should I use 6 or 12 months of data? PDF or slides? Include charts or just tables? Portrait or landscape?',
+                    'body' => 'Got it! Before I start, should I use 6 or 12 months of data? PDF or slides? Include charts or just tables? Portrait or landscape?',
                     'is_correct' => false,
                     'diagnostic' => 'Now that you’re unblocked on the thing that mattered, you stalled again over small details you could reasonably decide yourself.',
                     'lesson' => [
                         'slug' => 'one-clarifying-question-once-unblocked-move',
                         'title' => 'Once the key question’s answered, go',
-                        'body' => "You asked the one question that mattered and got your answer: a decision doc for the partners about a second branch. That's enough to start. Circling back with a fresh list of small choices undoes the good the first question did.\n\nWhichever data range and layout best serve a branch decision — you can judge that. Pick sensibly, note it in a line, and proceed. Re-opening the questions makes you look like you can't act without permission at every step.\n\nThe pattern is: one sharp question to unblock, then momentum. Don't trade the crisp first question for a slow trickle of follow-ups on things you're equipped to decide.",
+                        'body' => "You asked the one question that mattered and got your answer: a decision doc for the partners about a second branch. That's enough to start. Circling back with a fresh list of small choices undoes the good the first question did.\n\nWhichever data range and layout best serve a branch decision, you can judge that yourself. Pick sensibly, note it in a line, and proceed. Re-opening the questions makes you look like you can't act without permission at every step.\n\nThe pattern is one sharp question to unblock yourself, and then momentum. Don't trade the crisp first question for a slow trickle of follow-ups on things you're equipped to decide.",
                     ],
                 ],
                 [
                     'order' => 2,
-                    'body' => "Perfect — a decision doc for the three of you on the second branch. I'll cover the last 6 months of sales and foot-traffic trends since that's what's relevant, and include a short costs-vs-upside section so it actually helps you decide. Draft to you tomorrow morning.",
+                    'body' => "Perfect, a decision doc for the three of you on the second branch. I'll cover the last 6 months of sales and foot-traffic trends since that's what's relevant, and include a short costs-vs-upside section so it actually helps you decide. Draft to you tomorrow morning.",
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
                 ],
                 [
                     'order' => 3,
-                    'body' => "Love it — I'll build the whole report around the new mall location you're eyeing, with the rent and footfall for that specific spot front and centre.",
+                    'body' => "Love it! I'll build the whole report around the new mall location you're eyeing, with the rent and footfall for that specific spot front and centre.",
                     'is_correct' => false,
                     'diagnostic' => 'Marco never named a location, so you filled a genuine, decision-critical gap with an invented specific and built around it.',
                     'lesson' => [
                         'slug' => 'one-clarifying-question-know-what-to-assume',
                         'title' => 'Assume the small stuff, never the deciding stuff',
-                        'body' => "There's a line between sensible defaults and reckless guesses. Layout and data range are safe to assume — get them slightly off and it's a quick tweak. Which location they're considering is not: it's central to the whole decision, and you invented it.\n\nThe test is: if I'm wrong about this, is it a two-minute fix or a rebuild? Two-minute-fix details you assume and note. Rebuild-if-wrong details you confirm before building on them.\n\nHaving asked one good question doesn't license guessing on the next big unknown. Assume freely on the trivial; verify anything that would sink the work if you got it wrong.",
+                        'body' => "There's a line between sensible defaults and reckless guesses. Layout and data range are safe to assume, since getting them slightly off is a quick tweak. Which location they're considering is a different matter. It's central to the whole decision, and you just invented it.\n\nThe test is simple. If you're wrong about this, is it a two-minute fix or a rebuild? Two-minute-fix details you assume and note. Rebuild-if-wrong details you confirm before building on them.\n\nHaving asked one good question doesn't license guessing on the next big unknown. Assume freely on the trivial stuff, but verify anything that would sink the work if you got it wrong.",
                     ],
                 ],
                 [
                     'order' => 4,
-                    'body' => "Great — to make sure nothing's missing, I'll pack in every metric we have: full sales history, all supplier costs, staff schedules, customer reviews, inventory logs, the lot. Better to give them everything.",
+                    'body' => "Great! To make sure nothing's missing, I'll pack in every metric we have: full sales history, all supplier costs, staff schedules, customer reviews, inventory logs, the lot. Better to give them everything.",
                     'is_correct' => false,
                     'diagnostic' => 'You dumped every available metric instead of the few that bear on a branch decision, pushing the sifting work onto the partners.',
                     'lesson' => [
                         'slug' => 'one-clarifying-question-tailor-to-the-decision',
                         'title' => 'A decision doc includes what decides, not everything',
-                        'body' => "\"Give them everything so nothing's missing\" sounds safe but produces a document nobody can use. A report meant to inform a decision should carry the handful of numbers that bear on that decision — not the entire data warehouse for the reader to sift.\n\nYou already know the decision: open a second branch or not. That tells you what's relevant — demand, capacity, the money — and what's noise for this purpose. Curating to the decision is the work; dumping everything is skipping it.\n\nMore data isn't more helpful. The partners are paying, in attention, for you to have separated signal from noise. Include what moves the decision and leave the rest out.",
+                        'body' => "\"Give them everything so nothing's missing\" sounds safe but produces a document nobody can use. A report meant to inform a decision should carry the handful of numbers that bear on that decision, not the entire data warehouse for the reader to sift.\n\nYou already know the decision: open a second branch or not. That tells you what's relevant, like demand, capacity, and the money, and what's just noise for this purpose. Curating to the decision is the actual work, and dumping everything is skipping it.\n\nMore data isn't more helpful. The partners are paying, in attention, for you to have separated the signal from the noise. Include what moves the decision and leave the rest out.",
                     ],
                 ],
             ],
         ],
         [
             'order' => 3,
-            'client_message' => 'Sounds spot on. You know what, for this and going forward — just make these however you think is best, I trust your judgement 🙌',
+            'client_message' => 'Sounds spot on. You know what, for this and going forward, just make these however you think is best, I trust your judgement 🙌',
             'scaffold_hint' => null,
+            'tagalog_tip' => 'Binigyan ka na ni Marco ng trust at free hand, pero ibig sabihin ba nun ay tahimik ka na lang hanggang deadline? Isipin mo paano mo gagamitin yung tiwala na yun ng tama, hindi sobra at hindi rin kulang.',
             'options' => [
                 [
                     'order' => 1,
@@ -127,36 +130,36 @@ return [
                     'lesson' => [
                         'slug' => 'one-clarifying-question-trust-isnt-silence',
                         'title' => 'Being trusted means fewer questions, not no signposting',
-                        'body' => "\"I trust your judgement\" is permission to decide, not permission to go dark. \"Surprise you Thursday\" leaves an open loop right before a meeting that matters — if your read of 'best' differs from his, he finds out with no time to adjust.\n\nAutonomy and visibility aren't opposites. You can make the calls and still surface the one or two that shape the result, so he can nod or nudge in ten seconds. That's not asking permission; it's keeping him oriented.\n\nEarned trust is spent well by making fewer, sharper check-ins — not by disappearing until the deadline and hoping your guess of 'best' matches his.",
+                        'body' => "\"I trust your judgement\" gives you permission to decide. It doesn't give you permission to go dark. \"Surprise you Thursday\" leaves an open loop right before a meeting that matters, so if your read of 'best' differs from his, he finds out with no time to adjust.\n\nAutonomy and visibility aren't opposites. You can make the calls and still surface the one or two that shape the result, so he can nod or nudge in ten seconds. That isn't asking permission. It's keeping him oriented.\n\nEarned trust is spent well by making fewer and sharper check-ins. It isn't spent by disappearing until the deadline and hoping your guess of 'best' matches his.",
                     ],
                 ],
                 [
                     'order' => 2,
-                    'body' => "I appreciate that, but I really can't start without a proper brief — can you write up exactly what you want in the report, section by section, so I get it right?",
+                    'body' => "I appreciate that, but I really can't start without a proper brief. Can you write up exactly what you want in the report, section by section, so I get it right?",
                     'is_correct' => false,
                     'diagnostic' => 'The client just handed you reasonable autonomy and you refused it, demanding a full brief you have enough to proceed without.',
                     'lesson' => [
                         'slug' => 'one-clarifying-question-accept-the-autonomy',
                         'title' => 'When trust is offered, take it',
-                        'body' => "A client saying \"use your judgement\" is a gift — it means fewer round-trips and a smoother working relationship. Insisting on a detailed brief anyway rejects that gift and signals you can't operate without being told every move.\n\nYou already have what you need: it's a decision doc for the partners on a second branch. That's enough to produce a strong first draft. Demanding a section-by-section spec is the opposite of the initiative the client is inviting.\n\nAccept reasonable autonomy, make sensible calls, and show your work in the draft. If something genuinely blocks you later, ask then — but don't answer offered trust with a request for more instructions.",
+                        'body' => "A client saying \"use your judgement\" is a gift. It means fewer round-trips and a smoother working relationship. Insisting on a detailed brief anyway rejects that gift and signals you can't operate without being told every move.\n\nYou already have what you need: it's a decision doc for the partners on a second branch. That's enough to produce a strong first draft. Demanding a section-by-section spec is the opposite of the initiative the client is inviting.\n\nAccept reasonable autonomy, make sensible calls, and show your work in the draft. If something genuinely blocks you later, ask then. Just don't answer offered trust with a request for more instructions.",
                     ],
                 ],
                 [
                     'order' => 3,
-                    'body' => "Thanks, I'll run with it. To keep us aligned: I'll deliver a one-page summary plus a clear recommendation on the branch. If you'd rather have the full underlying numbers attached too, just say the word — otherwise you'll have it Wednesday for a look before Thursday.",
+                    'body' => "Thanks, I'll run with it. To keep us aligned: I'll deliver a one-page summary plus a clear recommendation on the branch. If you'd rather have the full underlying numbers attached too, just say the word. Otherwise you'll have it Wednesday for a look before Thursday.",
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
                 ],
                 [
                     'order' => 4,
-                    'body' => "Thanks for trusting me! Since I've got a free hand, I'll go big — a full 20-slide deck with five-year financial projections, a marketing plan for the new branch, and hiring recommendations too.",
+                    'body' => "Thanks for trusting me! Since I've got a free hand, I'll go big: a full 20-slide deck with five-year financial projections, a marketing plan for the new branch, and hiring recommendations too.",
                     'is_correct' => false,
                     'diagnostic' => 'You read “I trust you” as licence to balloon a one-page decision doc into a huge deliverable nobody asked for.',
                     'lesson' => [
                         'slug' => 'one-clarifying-question-trust-isnt-scope-creep',
                         'title' => 'Freedom in how, not licence to expand what',
-                        'body' => "\"Do it however you think best\" is discretion over the how — format, structure, judgement calls. It isn't an invitation to triple the scope with projections, marketing plans, and hiring advice nobody requested.\n\nGold-plating an ask, even with good intentions, creates work the client must now review, and often drags the deadline. A tight, on-target one-pager beats a sprawling deck that buries the decision it was meant to support.\n\nUse the freedom to make the agreed deliverable excellent, not to quietly grow it into a bigger project. Match the effort to the job you were actually given.",
+                        'body' => "\"Do it however you think best\" is discretion over the how, meaning format, structure, and judgement calls. It isn't an invitation to triple the scope with projections, marketing plans, and hiring advice nobody requested.\n\nGold-plating an ask, even with good intentions, creates work the client must now review, and it often drags the deadline. A tight, on-target one-pager beats a sprawling deck that buries the decision it was meant to support.\n\nUse the freedom to make the agreed deliverable excellent, and resist the urge to quietly grow it into a bigger project. Match the effort to the job you were actually given.",
                     ],
                 ],
             ],

@@ -39,6 +39,7 @@ export type PlayerBeat = {
     order: number;
     clientMessage: string;
     scaffoldHint: string | null;
+    tagalogTip: string | null;
     options: PlayerOption[];
 };
 

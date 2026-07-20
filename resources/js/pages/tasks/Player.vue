@@ -10,6 +10,7 @@ import DiagnosticPanel from '@/components/DiagnosticPanel.vue';
 import MicroLesson from '@/components/MicroLesson.vue';
 import OptionList from '@/components/OptionList.vue';
 import SuggestedReply from '@/components/SuggestedReply.vue';
+import TagalogTip from '@/components/TagalogTip.vue';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -35,7 +36,7 @@ const props = defineProps<{
 
 defineOptions({
     layout: {
-        breadcrumbs: [{ title: 'Track', href: dashboard() }],
+        breadcrumbs: [{ title: 'Foundations', href: dashboard() }],
     },
 });
 
@@ -180,7 +181,7 @@ function useSuggested(reply: string): void {
                     You've already passed this task. Nice work.
                 </p>
                 <Button as-child variant="secondary" size="sm">
-                    <Link :href="dashboard()">Back to Track</Link>
+                    <Link :href="dashboard()">Back to Foundations</Link>
                 </Button>
             </CardContent>
         </Card>
@@ -194,6 +195,11 @@ function useSuggested(reply: string): void {
                     :persona="task.clientPersona"
                     :message="beat.clientMessage"
                     :scaffold-hint="beat.scaffoldHint"
+                />
+                <TagalogTip
+                    v-if="beat.tagalogTip"
+                    :tip="beat.tagalogTip"
+                    class="mt-4"
                 />
             </CardContent>
         </Card>
@@ -266,7 +272,7 @@ function useSuggested(reply: string): void {
                 v-else-if="aiFeedback.graderUnavailable"
                 class="animate-in rounded-xl border border-border bg-muted/40 p-4 text-sm text-muted-foreground duration-300 fade-in slide-in-from-bottom-2"
             >
-                Our coach is busy right now — pick from the options below
+                Our coach is busy right now. Pick from the options below
                 instead.
             </div>
             <template v-else>

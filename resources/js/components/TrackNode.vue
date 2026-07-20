@@ -4,11 +4,12 @@ import {
     Bot,
     Check,
     ClipboardList,
+    Compass,
     Lock,
     MessageSquare,
     ListChecks,
-    type LucideIcon,
 } from '@lucide/vue';
+import type { LucideIcon } from '@lucide/vue';
 import { computed } from 'vue';
 import TaskController from '@/actions/App/Http/Controllers/TaskController';
 import { cn } from '@/lib/utils';
@@ -19,6 +20,7 @@ const props = defineProps<{
 }>();
 
 const categoryIcons: Record<string, LucideIcon> = {
+    intro: Compass,
     comms: MessageSquare,
     prioritization: ListChecks,
     ai: Bot,
@@ -33,9 +35,11 @@ const icon = computed<LucideIcon>(() => {
     if (isPassed.value) {
         return Check;
     }
+
     if (isLocked.value) {
         return Lock;
     }
+
     return categoryIcons[props.node.category] ?? MessageSquare;
 });
 </script>
@@ -50,7 +54,7 @@ const icon = computed<LucideIcon>(() => {
                 'group flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-all duration-200',
                 isPlayable &&
                     'hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg',
-                isLocked && 'cursor-not-allowed opacity-55',
+                isLocked && 'cursor-not-allowed border-border/60',
                 node.isCurrent && 'glow-primary border-primary/50',
             )
         "
@@ -68,11 +72,11 @@ const icon = computed<LucideIcon>(() => {
                         !isLocked &&
                         'border-border bg-secondary text-foreground',
                     isLocked &&
-                        'border-border bg-secondary text-muted-foreground',
+                        'border-border/60 bg-muted text-muted-foreground',
                 )
             "
         >
-            <component :is="icon" class="size-5" />
+            <component :is="icon" :class="cn('size-5', isLocked && 'grayscale')" />
         </div>
 
         <!-- Title + persona -->

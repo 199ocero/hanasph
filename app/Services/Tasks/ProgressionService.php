@@ -121,24 +121,66 @@ class ProgressionService
     }
 
     /**
-     * Unlock the next still-locked task in order, if any.
+     * Unlock the next still-locked task, if any.
+     *
+     * The beginner intro tasks are all unlocked together at onboarding and can
+     * be cleared in any order, so passing one intro doesn't linearly open the
+     * next. Instead, the first real (non-intro) task stays locked until every
+     * intro task is passed. Beyond the intro gate, progression is linear.
      */
     public function unlockNext(User $user, Task $task): ?Task
     {
-        $next = $task->nextTask();
+        if ($task->is_intro) {
+            if (! $this->allIntrosPassed($user)) {
+                return null;
+            }
 
-        if ($next === null) {
-            return null;
+            $firstReal = Task::query()
+                ->where('is_intro', false)
+                ->orderBy('order')
+                ->first();
+
+            return $firstReal === null ? null : $this->unlockIfLocked($user, $firstReal);
         }
 
-        $progress = $this->progressFor($user, $next);
+        $next = $task->nextTask();
+
+        return $next === null ? null : $this->unlockIfLocked($user, $next);
+    }
+
+    /**
+     * Flip a task from locked to unlocked, returning it when it changed.
+     */
+    protected function unlockIfLocked(User $user, Task $task): ?Task
+    {
+        $progress = $this->progressFor($user, $task);
 
         if ($progress->status === UserTaskProgress::STATUS_LOCKED) {
             $progress->update(['status' => UserTaskProgress::STATUS_UNLOCKED]);
 
-            return $next;
+            return $task;
         }
 
         return null;
+    }
+
+    /**
+     * Whether the user has passed every intro task (skipped counts as passed).
+     */
+    protected function allIntrosPassed(User $user): bool
+    {
+        $introIds = Task::query()->where('is_intro', true)->pluck('id');
+
+        if ($introIds->isEmpty()) {
+            return true;
+        }
+
+        $passedIntros = UserTaskProgress::query()
+            ->where('user_id', $user->id)
+            ->whereIn('task_id', $introIds)
+            ->where('status', UserTaskProgress::STATUS_PASSED)
+            ->count();
+
+        return $passedIntros === $introIds->count();
     }
 }
