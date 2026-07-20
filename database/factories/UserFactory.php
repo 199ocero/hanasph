@@ -33,6 +33,10 @@ class UserFactory extends Factory
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'two_factor_confirmed_at' => null,
+            'needs_scaffolding' => false,
+            'xp' => 0,
+            'current_streak' => 0,
+            'longest_streak' => 0,
         ];
     }
 
@@ -43,6 +47,19 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the user has completed onboarding.
+     */
+    public function onboarded(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'onboarded_at' => now(),
+            'va_skills' => ['admin'],
+            'va_motivation' => 'work_from_home',
+            'va_challenge' => 'talking_to_clients',
         ]);
     }
 
