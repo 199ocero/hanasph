@@ -6,7 +6,9 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -19,6 +21,15 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string $name
  * @property string $email
  * @property Carbon|null $email_verified_at
+ * @property Carbon|null $onboarded_at
+ * @property array<int, string>|null $va_skills
+ * @property string|null $va_motivation
+ * @property string|null $va_challenge
+ * @property bool $needs_scaffolding
+ * @property int $xp
+ * @property int $current_streak
+ * @property int $longest_streak
+ * @property Carbon|null $last_pass_on
  * @property string $password
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
@@ -26,6 +37,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read Collection<int, UserTaskProgress> $taskProgress
+ * @property-read Collection<int, TaskAttempt> $taskAttempts
  */
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
@@ -43,8 +56,36 @@ class User extends Authenticatable implements PasskeyUser
     {
         return [
             'email_verified_at' => 'datetime',
+            'onboarded_at' => 'datetime',
+            'va_skills' => 'array',
+            'needs_scaffolding' => 'boolean',
+            'last_pass_on' => 'date',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * @return HasMany<UserTaskProgress, $this>
+     */
+    public function taskProgress(): HasMany
+    {
+        return $this->hasMany(UserTaskProgress::class);
+    }
+
+    /**
+     * @return HasMany<TaskAttempt, $this>
+     */
+    public function taskAttempts(): HasMany
+    {
+        return $this->hasMany(TaskAttempt::class);
+    }
+
+    /**
+     * Whether the user has completed onboarding.
+     */
+    public function hasOnboarded(): bool
+    {
+        return $this->onboarded_at !== null;
     }
 }

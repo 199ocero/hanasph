@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Beat;
+use App\Models\Option;
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -44,7 +47,45 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * Build a task with the given number of beats, each with 4 options where
+ * option order 1 is the correct one. Handy for engine tests that don't need
+ * the authored content.
+ *
+ * @param  array<string, mixed>  $attributes
+ */
+function makeTask(int $order = 1, int $beats = 2, array $attributes = []): Task
 {
-    // ..
+    $task = Task::factory()->create(['order' => $order, ...$attributes]);
+
+    for ($b = 1; $b <= $beats; $b++) {
+        $beat = Beat::factory()->create(['task_id' => $task->id, 'order' => $b]);
+
+        for ($o = 1; $o <= 4; $o++) {
+            Option::factory()->create([
+                'beat_id' => $beat->id,
+                'order' => $o,
+                'is_correct' => $o === 1,
+                'diagnostic' => $o === 1 ? null : "Wrong for reason {$o}.",
+            ]);
+        }
+    }
+
+    return $task->load('beats.options');
+}
+
+/**
+ * The beat of a task at the given order.
+ */
+function beat($task, int $order)
+{
+    return $task->beats->firstWhere('order', $order);
+}
+
+/**
+ * The option of a beat at the given order.
+ */
+function optionOf($beat, int $order)
+{
+    return $beat->options->firstWhere('order', $order);
 }
