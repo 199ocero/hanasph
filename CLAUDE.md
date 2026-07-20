@@ -116,6 +116,13 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 - Laravel can be deployed using [Laravel Cloud](https://cloud.laravel.com/), which is the fastest way to deploy and scale production Laravel applications.
 
+=== herd rules ===
+
+# Laravel Herd
+
+- The application is served by Laravel Herd at `https?://[kebab-case-project-dir].test`. Use the `get-absolute-url` tool to generate valid URLs. Never run commands to serve the site. It is always available.
+- Use the `herd` CLI to manage services, PHP versions, and sites (e.g. `herd sites`, `herd services:start <service>`, `herd php:list`). Run `herd list` to discover all available commands.
+
 === tests rules ===
 
 # Test Enforcement
@@ -206,3 +213,36 @@ Vue components must have a single root element.
 - IMPORTANT: Activate `inertia-vue-development` when working with Inertia Vue client-side patterns.
 
 </laravel-boost-guidelines>
+
+## UI Design System
+
+This app uses a dark-only, gamified visual style (Discord/trophy.so-inspired). Follow these conventions when building or editing any frontend component.
+
+### Theme
+
+- Always dark. There is no light mode and no `dark:` variant toggling — `<html>` always carries the `dark` class. Don't reintroduce a light theme or an appearance toggle.
+- All colors come from CSS variables in `resources/css/app.css` (`:root` + `@theme inline`). Never hardcode hex/rgb colors in components — use the semantic Tailwind utilities (`bg-card`, `text-muted-foreground`, `border-border`, etc.) or the gamification-specific tokens: `success`, `warning`, `gold`, `rarity-common|rare|epic|legendary`, `presence-online|idle|dnd|offline`.
+- Brand/primary color is **orange** (`hsl(24 95% 58%)`), not purple/indigo/"AI blurple". Avoid steering the palette back toward purple as the primary/dominant color — it reads as generic AI-generated UI. Purple is fine only as the fixed "epic" rarity accent.
+- Display font (`font-display`, Space Grotesk) is for numbers/headings that should feel game-like (level numbers, XP counts, stat values, achievement titles). Body text stays on the default `font-sans` (Instrument Sans).
+
+### Avoid generic "AI-generated UI" patterns
+
+- No left-border accent bars on active nav/list items. Use a solid background highlight (the sidebar's built-in `data-[active=true]:bg-sidebar-accent` treatment) instead, optionally tinting just the icon with `text-primary`.
+- Don't rely on colored text alone for "active"/"selected" state contrast — pair it with a solid, high-contrast background + `text-foreground`/`text-sidebar-accent-foreground` so it never becomes hard to read against the dark background.
+
+### Motion & animation
+
+Keep animation restrained: one-time entrance transitions and hover feedback are welcome; continuous/ambient motion should be rare and purposeful (never more than one or two looping animations visible at once).
+
+- Reusable utilities are defined in `resources/css/app.css` under `@layer utilities` — reuse them instead of writing new keyframes:
+  - `.animate-flame` — subtle flicker (scale/rotate/opacity loop), reserved for "hot streak" flame icons.
+  - `.animate-glow-primary` — pulsing brand-color glow, reserved for a single actionable/ready element at a time (e.g. a claimable reward button). Don't apply it to more than one visible element simultaneously.
+  - `.glow-primary` / `.glow-gold` / `.glow-success` — static (non-animated) `color-mix()` glows for one-time "completed/legendary" states.
+- Page-load entrance pattern (see `resources/js/pages/Dashboard.vue`): `animate-in fade-in slide-in-from-bottom-2 fill-mode-both duration-500`, staggered per section with `delay-75` / `delay-150` / `delay-200`. Always pair a `delay-*` with `fill-mode-both` to avoid a flash of content before the animation starts.
+- Hover micro-interaction for interactive/hoverable cards: `transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg` (see `AchievementCard.vue`). Don't add this to purely informational, non-interactive cards (e.g. `StatTile.vue`) — a hover-lift implies clickability that isn't there.
+- Interactive elements that change color on state (nav items, active icons) should have `transition-colors` so the change isn't an abrupt jump.
+- Prefer the `tw-animate-css` utilities (`animate-in`, `fade-in`, `slide-in-from-*`, `zoom-in-*`, `delay-*`, `fill-mode-*` — already a project dependency) over hand-rolled `@keyframes`. Only add a custom keyframe in `app.css` when nothing in that library covers it (as done for `flame-flicker` and `pulse-glow-primary`).
+
+### Gamification components
+
+Reusable building blocks live flat in `resources/js/components/` (no subfolder), following existing project convention: `LevelBadge`, `XpBar`, `StreakCounter`, `PresenceIndicator`, `AvatarStack`, `StatTile`, `AchievementCard`/`AchievementGrid`, `LeaderboardTable`, `QuestItem`/`QuestList`, `AchievementToast`. Reuse these for any new gamified UI instead of building bespoke equivalents. Shared types for this domain are in `resources/js/types/gamification.ts`.
