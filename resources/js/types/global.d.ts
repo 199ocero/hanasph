@@ -1,4 +1,6 @@
 import type { Auth } from '@/types/auth';
+import type { CatalogCourse } from '@/types/skills';
+import type { Progression } from '@/types/tasks';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -18,6 +20,8 @@ declare module '@inertiajs/core' {
         sharedPageProps: {
             name: string;
             auth: Auth;
+            progression: Progression | null;
+            catalog: CatalogCourse[];
             sidebarOpen: boolean;
             [key: string]: unknown;
         };
