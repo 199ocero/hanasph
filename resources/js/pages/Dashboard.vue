@@ -1,46 +1,55 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import { CheckCircle2, Crown, Trophy, Zap } from '@lucide/vue';
-import AchievementGrid from '@/components/AchievementGrid.vue';
-import LeaderboardTable from '@/components/LeaderboardTable.vue';
+import { Head, usePage } from '@inertiajs/vue3';
+import { CheckCircle2, Flame, Zap } from '@lucide/vue';
+import { computed, onMounted } from 'vue';
 import LevelBadge from '@/components/LevelBadge.vue';
-import QuestList from '@/components/QuestList.vue';
 import StatTile from '@/components/StatTile.vue';
 import StreakCounter from '@/components/StreakCounter.vue';
+import TrackMap from '@/components/TrackMap.vue';
 import { Card, CardContent } from '@/components/ui/card';
 import XpBar from '@/components/XpBar.vue';
-import { demoAchievements, demoLeaderboard, demoQuests } from '@/lib/demoData';
+import { notifyAchievementUnlocked } from '@/lib/rewardToast';
 import { dashboard } from '@/routes';
+import type { Celebration, TrackNode, TrackStats } from '@/types/tasks';
+
+const props = defineProps<{
+    nodes: TrackNode[];
+    stats: TrackStats;
+    celebration: Celebration | null;
+}>();
 
 defineOptions({
     layout: {
-        breadcrumbs: [
-            {
-                title: 'Dashboard',
-                href: dashboard(),
-            },
-        ],
+        breadcrumbs: [{ title: 'Track', href: dashboard() }],
     },
 });
 
-const player = {
-    name: 'You',
-    title: 'Rank #4 · Silver League',
-    level: 12,
-    xp: 340,
-    xpToNext: 500,
-    streak: 12,
-};
+const page = usePage();
+const progression = computed(() => page.props.progression);
 
-const unlockedCount = demoAchievements.filter((a) => a.unlocked).length;
+const levelProgress = computed(() => {
+    const p = progression.value;
+    if (!p || p.xpForNextLevel === 0) {
+        return 0;
+    }
+    return (p.xpIntoLevel / p.xpForNextLevel) * 100;
+});
+
+onMounted(() => {
+    if (props.celebration) {
+        notifyAchievementUnlocked({
+            title: `Task passed: ${props.celebration.title}`,
+            rarity: 'epic',
+        });
+    }
+});
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Your Track" />
 
-    <div
-        class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4"
-    >
+    <div class="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 p-4">
+        <!-- Player header -->
         <Card
             class="animate-in duration-500 fill-mode-both fade-in slide-in-from-bottom-2"
         >
@@ -48,8 +57,9 @@ const unlockedCount = demoAchievements.filter((a) => a.unlocked).length;
                 class="flex flex-col gap-6 sm:flex-row sm:items-center"
             >
                 <LevelBadge
-                    :level="player.level"
-                    :progress="(player.xp / player.xpToNext) * 100"
+                    v-if="progression"
+                    :level="progression.level"
+                    :progress="levelProgress"
                     size="lg"
                 />
                 <div class="flex-1 space-y-2">
@@ -57,83 +67,58 @@ const unlockedCount = demoAchievements.filter((a) => a.unlocked).length;
                         <h1
                             class="font-display text-xl font-semibold text-foreground"
                         >
-                            {{ player.name }}
+                            Your VA Track
                         </h1>
-                        <StreakCounter :days="player.streak" />
+                        <StreakCounter
+                            v-if="progression"
+                            :days="progression.streak"
+                        />
                     </div>
                     <p class="text-sm text-muted-foreground">
-                        {{ player.title }}
+                        {{ stats.passed }} of {{ stats.total }} client scenarios
+                        passed — keep going.
                     </p>
                     <XpBar
-                        :current="player.xp"
-                        :max="player.xpToNext"
+                        v-if="progression"
+                        :current="progression.xpIntoLevel"
+                        :max="progression.xpForNextLevel"
                         label="Level progress"
                     />
                 </div>
             </CardContent>
         </Card>
 
+        <!-- Stat row -->
         <div
-            class="grid animate-in grid-cols-2 gap-4 delay-75 duration-500 fill-mode-both fade-in slide-in-from-bottom-2 md:grid-cols-4"
+            class="grid animate-in grid-cols-3 gap-4 delay-75 duration-500 fill-mode-both fade-in slide-in-from-bottom-2"
         >
             <StatTile
                 label="Total XP"
-                value="24,180"
+                :value="progression?.xp ?? 0"
                 :icon="Zap"
-                :trend="{ value: 8, direction: 'up' }"
             />
             <StatTile
-                label="Achievements"
-                :value="`${unlockedCount}/${demoAchievements.length}`"
-                :icon="Trophy"
-            />
-            <StatTile
-                label="Current Rank"
-                value="#4"
-                :icon="Crown"
-                :trend="{ value: 2, direction: 'up' }"
-            />
-            <StatTile
-                label="Quests Completed"
-                value="47"
+                label="Tasks passed"
+                :value="`${stats.passed}/${stats.total}`"
                 :icon="CheckCircle2"
+            />
+            <StatTile
+                label="Day streak"
+                :value="progression?.streak ?? 0"
+                :icon="Flame"
             />
         </div>
 
+        <!-- Track map -->
         <div
             class="animate-in space-y-3 delay-150 duration-500 fill-mode-both fade-in slide-in-from-bottom-2"
         >
             <h2
                 class="font-display text-sm font-semibold tracking-wide text-muted-foreground uppercase"
             >
-                Achievements
+                Your journey
             </h2>
-            <AchievementGrid :achievements="demoAchievements" />
-        </div>
-
-        <div
-            class="grid animate-in gap-6 delay-200 duration-500 fill-mode-both fade-in slide-in-from-bottom-2 lg:grid-cols-5"
-        >
-            <Card class="lg:col-span-3">
-                <CardContent>
-                    <h2
-                        class="mb-4 font-display text-sm font-semibold tracking-wide text-muted-foreground uppercase"
-                    >
-                        Leaderboard
-                    </h2>
-                    <LeaderboardTable :entries="demoLeaderboard" />
-                </CardContent>
-            </Card>
-            <Card class="lg:col-span-2">
-                <CardContent>
-                    <h2
-                        class="mb-4 font-display text-sm font-semibold tracking-wide text-muted-foreground uppercase"
-                    >
-                        Quests
-                    </h2>
-                    <QuestList :quests="demoQuests" />
-                </CardContent>
-            </Card>
+            <TrackMap :nodes="nodes" />
         </div>
     </div>
 </template>
