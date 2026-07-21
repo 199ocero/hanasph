@@ -7,12 +7,14 @@ import {
     Megaphone,
     PenLine,
     Route,
+    Shield,
     ShoppingCart,
     Sparkles,
     Table,
 } from '@lucide/vue';
 import type { LucideIcon } from '@lucide/vue';
 import { computed } from 'vue';
+import { index as adminIndex } from '@/actions/App/Http/Controllers/Admin/DashboardController';
 import {
     index as coursesIndex,
     show as courseShow,
@@ -53,17 +55,31 @@ function courseIcon(icon: string | null): LucideIcon {
     return (icon && courseIcons[icon]) || BookOpen;
 }
 
-// Foundations stays active on the dashboard (the map) and while playing a task.
-const mainNavItems = computed<NavItem[]>(() => [
-    {
-        title: 'Foundations',
-        href: dashboard(),
-        icon: Route,
-        isActive: isCurrentUrl(dashboard()) || isCurrentOrParentUrl('/tasks'),
-    },
-]);
-
 const page = usePage();
+
+// Foundations stays active on the dashboard (the map) and while playing a task.
+const mainNavItems = computed<NavItem[]>(() => {
+    const items: NavItem[] = [
+        {
+            title: 'Foundations',
+            href: dashboard(),
+            icon: Route,
+            isActive:
+                isCurrentUrl(dashboard()) || isCurrentOrParentUrl('/tasks'),
+        },
+    ];
+
+    if (page.props.auth.user?.is_admin) {
+        items.push({
+            title: 'Admin',
+            href: adminIndex.url(),
+            icon: Shield,
+            isActive: isCurrentOrParentUrl('/admin'),
+        });
+    }
+
+    return items;
+});
 const progression = computed(() => page.props.progression);
 const catalog = computed(() => page.props.catalog ?? []);
 const levelProgress = computed(() => {

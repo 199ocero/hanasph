@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'is_admin' => false,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'two_factor_secret' => null,
@@ -60,6 +61,16 @@ class UserFactory extends Factory
             'va_skills' => ['admin'],
             'va_motivation' => 'work_from_home',
             'va_challenge' => 'talking_to_clients',
+        ]);
+    }
+
+    /**
+     * Indicate that the user can access the admin QA tools.
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_admin' => true,
         ]);
     }
 

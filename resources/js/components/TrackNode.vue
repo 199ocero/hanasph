@@ -76,7 +76,10 @@ const icon = computed<LucideIcon>(() => {
                 )
             "
         >
-            <component :is="icon" :class="cn('size-5', isLocked && 'grayscale')" />
+            <component
+                :is="icon"
+                :class="cn('size-5', isLocked && 'grayscale')"
+            />
         </div>
 
         <!-- Title + persona -->

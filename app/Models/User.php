@@ -21,6 +21,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string $name
  * @property string $email
  * @property Carbon|null $email_verified_at
+ * @property bool $is_admin
  * @property Carbon|null $onboarded_at
  * @property array<int, string>|null $va_skills
  * @property string|null $va_motivation
@@ -56,6 +57,7 @@ class User extends Authenticatable implements PasskeyUser
     {
         return [
             'email_verified_at' => 'datetime',
+            'is_admin' => 'boolean',
             'onboarded_at' => 'datetime',
             'va_skills' => 'array',
             'needs_scaffolding' => 'boolean',
@@ -87,6 +89,14 @@ class User extends Authenticatable implements PasskeyUser
     public function hasOnboarded(): bool
     {
         return $this->onboarded_at !== null;
+    }
+
+    /**
+     * Whether the user can access the admin QA tools.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
     }
 
     /**

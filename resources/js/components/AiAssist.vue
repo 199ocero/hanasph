@@ -39,7 +39,9 @@ async function copyPrompt(): Promise<void> {
                 >
                     <Sparkles class="size-5" />
                 </div>
-                <h3 class="font-display text-base font-semibold text-foreground">
+                <h3
+                    class="font-display text-base font-semibold text-foreground"
+                >
                     Use AI on this
                 </h3>
             </div>
@@ -71,8 +73,7 @@ async function copyPrompt(): Promise<void> {
                 </div>
                 <pre
                     class="overflow-x-auto rounded-lg border border-border bg-muted/40 p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap text-muted-foreground"
-                    >{{ prompt }}</pre
-                >
+                    >{{ prompt }}</pre>
             </div>
         </CardContent>
     </Card>

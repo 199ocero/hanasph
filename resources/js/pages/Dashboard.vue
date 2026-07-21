@@ -29,9 +29,11 @@ const progression = computed(() => page.props.progression);
 
 const levelProgress = computed(() => {
     const p = progression.value;
+
     if (!p || p.xpForNextLevel === 0) {
         return 0;
     }
+
     return (p.xpIntoLevel / p.xpForNextLevel) * 100;
 });
 
