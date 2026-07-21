@@ -32,6 +32,8 @@ const props = defineProps<{
     isPassed: boolean;
     showOptionsDefault: boolean;
     feedback: AttemptFeedback | null;
+    previousAttempt: AttemptFeedback | null;
+    previousReplyText: string | null;
 }>();
 
 defineOptions({
@@ -42,25 +44,40 @@ defineOptions({
 
 const isFreeText = computed(() => props.task.aiGradingEnabled);
 
-const activeFeedback = ref<AttemptFeedback | null>(props.feedback);
+const activeFeedback = ref<AttemptFeedback | null>(
+    props.feedback ?? props.previousAttempt,
+);
 
-// Multiple-choice state (also used as the free-text scaffold).
-const selectedId = ref<number | null>(null);
+// Multiple-choice state (also used as the free-text scaffold). Seeded from a
+// prior attempt so revisiting an already-answered beat shows what was
+// submitted instead of a blank form.
+const selectedId = ref<number | null>(
+    props.previousAttempt && !isAiFeedback(props.previousAttempt)
+        ? props.previousAttempt.selectedOptionId
+        : null,
+);
 const mcForm = useForm<{ option_id: number | null }>({ option_id: null });
 
 // Free-text state.
-const replyForm = useForm<{ reply_text: string }>({ reply_text: '' });
+const replyForm = useForm<{ reply_text: string }>({
+    reply_text: props.previousReplyText ?? '',
+});
 const optionsRevealed = ref(false);
 const failedAiAttempts = ref(0);
 
-// A new beat (a server round-trip that advanced) resets everything.
+// A new beat (a server round-trip that advanced, or a beat picked from the
+// progress dots) reseeds from that beat's previous attempt, if any.
 watch(
     () => props.beat.id,
     () => {
-        selectedId.value = null;
-        activeFeedback.value = null;
+        selectedId.value =
+            props.previousAttempt && !isAiFeedback(props.previousAttempt)
+                ? props.previousAttempt.selectedOptionId
+                : null;
+        activeFeedback.value = props.feedback ?? props.previousAttempt;
         mcForm.reset();
         replyForm.reset();
+        replyForm.reply_text = props.previousReplyText ?? '';
         optionsRevealed.value = false;
         failedAiAttempts.value = 0;
     },
@@ -166,6 +183,8 @@ function useSuggested(reply: string): void {
                 <BeatProgress
                     :current="currentBeatIndex"
                     :total="task.beatCount"
+                    :task-slug="task.slug"
+                    :interactive="isPassed"
                 />
             </div>
             <p class="text-sm text-muted-foreground">

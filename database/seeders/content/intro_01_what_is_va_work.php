@@ -33,14 +33,14 @@ return [
             'tagalog_tip' => 'Ang VA ay parang katuwang ng isang negosyante, ginagawa mo online yung mga gawaing wala siyang oras gawin. Hindi ito iisang skill lang, at hindi rin ito basta call center.',
             'options' => [
                 [
-                    'order' => 2,
+                    'order' => 3,
                     'body' => 'A VA helps a business owner with everyday work, like email, scheduling, admin, or social media, done remotely so the owner can focus on bigger things.',
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
                 ],
                 [
-                    'order' => 3,
+                    'order' => 2,
                     'body' => 'A VA is basically a call center agent, you sit on the phone all day answering customer calls with a headset.',
                     'is_correct' => false,
                     'diagnostic' => 'That describes a BPO call center seat, but most VA work is behind-the-scenes support for one client, not phone queues.',
@@ -81,7 +81,7 @@ return [
             'tagalog_tip' => 'Ang trabaho ay remote, galing sa bahay mo, para sa isang client na kadalasan nasa ibang bansa at ibang oras. Yan yung ibig sabihin ng "virtual".',
             'options' => [
                 [
-                    'order' => 3,
+                    'order' => 1,
                     'body' => 'I work from home online, usually for a client abroad (US, Australia, UK), and part of the job is matching some of my hours to their timezone.',
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -99,7 +99,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 1,
+                    'order' => 3,
                     'body' => "Timezones don't matter at all, I can work whatever random hours I want and the client will never need any overlap with me.",
                     'is_correct' => false,
                     'diagnostic' => 'Many tasks are flexible, but clients usually need some overlap with their hours, so timezone isn\'t irrelevant.',
@@ -129,7 +129,7 @@ return [
             'tagalog_tip' => 'Dito, matututo ka sa paggawa, hindi sa panonood lang. Ilalagay ka sa totoong sitwasyon, pipili ka, at matututo ka sa feedback. Normal lang ang magkamali habang nag-aaral.',
             'options' => [
                 [
-                    'order' => 4,
+                    'order' => 2,
                     'body' => "By practicing on realistic client scenarios, making a call, and learning from the feedback when I'm wrong, so the thinking becomes second nature before real clients.",
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -147,7 +147,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 2,
+                    'order' => 4,
                     'body' => "By collecting as many certificates and badges as possible, since clients only care about how many courses I've finished.",
                     'is_correct' => false,
                     'diagnostic' => 'Clients hire for demonstrated judgment and reliability, not a stack of certificates, so chasing badges misses the point.',

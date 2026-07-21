@@ -32,7 +32,7 @@ return [
             'tagalog_tip' => 'Kaya turuan ng client ang skills. Ang hirap palitan ay ang taong hindi maaasahan. Kadalasan, mas mahalaga ang pagiging reliable at malinaw kaysa sa sobrang talino.',
             'options' => [
                 [
-                    'order' => 2,
+                    'order' => 4,
                     'body' => 'Being reliable and easy to communicate with, someone who does what they said they would, on time, and keeps the client in the loop.',
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -50,7 +50,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 4,
+                    'order' => 2,
                     'body' => 'Charging the absolute lowest price, being cheaper than everyone else is the only way a client will ever pick me.',
                     'is_correct' => false,
                     'diagnostic' => 'Racing to the lowest price attracts the worst clients and undercuts you, dependability is what earns and retains work.',
@@ -80,7 +80,7 @@ return [
             'tagalog_tip' => 'Sundin muna ang instruction, doon nabubuo ang tiwala. Kung may mas magandang ideya ka, imungkahi mo, wag mong basta palitan ang gusto nila nang hindi nagpapaalam.',
             'options' => [
                 [
-                    'order' => 3,
+                    'order' => 2,
                     'body' => "Do it their way as instructed, then mention my idea afterward: \"Done as you asked, here's it. One thought, we could also try X next time, want me to?\"",
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -109,7 +109,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 2,
+                    'order' => 3,
                     'body' => "Freeze and do nothing until I've convinced myself which way is truly best, even if that takes all day.",
                     'is_correct' => false,
                     'diagnostic' => 'Stalling on a clear instruction just delays their work, the client already told you what they want done.',
@@ -128,7 +128,7 @@ return [
             'tagalog_tip' => 'Nabubuo ang tiwala sa pagiging maingat at tapat: ingatan mo ang access nila, aminin agad ang pagkakamali, at wag lumabas sa pinapagawa sa\'yo.',
             'options' => [
                 [
-                    'order' => 4,
+                    'order' => 3,
                     'body' => 'Guarding their access carefully, staying within exactly what I was asked to do, and owning up quickly and honestly if I make a mistake.',
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -157,7 +157,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 3,
+                    'order' => 4,
                     'body' => "Being careless with their passwords, like reusing them or sending them over unsecured chats, since it's faster.",
                     'is_correct' => false,
                     'diagnostic' => 'Sloppy handling of a client\'s credentials risks a real security breach, which is one of the fastest ways to lose a client.',

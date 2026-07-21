@@ -26,7 +26,7 @@ return [
             'tagalog_tip' => 'Bago ka mag-book, balikan mo kung ano talaga yung goal ni Ken, hindi lang yung pinakamurang flight. Ikaw yung mag-fi-filter ng options para hindi na siya mahirapan.',
             'options' => [
                 [
-                    'order' => 1,
+                    'order' => 4,
                     'body' => "Found three good options within budget. The 8:40am arrives 10:05am, comfortable buffer before your 2pm, ₱3,850. There's also a cheaper 11:30am flight (₱3,200) but it lands 12:55pm, which is tight for getting to the venue and freshening up. I'd go with the 8:40am. Want me to book it?",
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -55,7 +55,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 4,
+                    'order' => 1,
                     'body' => "Sure! I pulled up the flights for the 15th: there's an 8:40am, a 9:15am, an 11:30am, a 12:55pm, a 1:40pm, plus a few with layovers. Prices range from ₱2,900 to ₱5,600. Which one would you like me to book?",
                     'is_correct' => false,
                     'diagnostic' => 'You handed him the full list to sort through instead of doing the filtering he hired you to do.',
@@ -74,7 +74,7 @@ return [
             'tagalog_tip' => 'Pansinin mo na nag-aaway yung budget at yung timing ng dinner niya. Isipin mo kung paano mo ipapaalam ang conflict nang malinaw imbes na basta ka na lang pumili para sa kanya.',
             'options' => [
                 [
-                    'order' => 1,
+                    'order' => 2,
                     'body' => "On it, booked the ₱3,600 return since that's within your budget. It lands 9:45pm, so you'll be back the same night as asked 👍",
                     'is_correct' => false,
                     'diagnostic' => 'Two constraints collided and you quietly picked budget over the dinner, booking a flight that lands too late for the thing he said he can\'t miss.',
@@ -85,7 +85,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 2,
+                    'order' => 1,
                     'body' => "Quick heads up on the return: the flights that get you home in time for an evening dinner are pricier than your ₱4,000. The 6:30pm lands Manila 8:00pm at ₱5,400, over budget, but it's the realistic option for a dinner that night. There's a ₱3,600 flight, but it's 9:45pm arrival, too late. Happy to book the 6:30pm. Okay to go a bit over budget for the return?",
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -122,14 +122,14 @@ return [
             'tagalog_tip' => 'Approved na ni Ken kaya i-close mo na nang maayos yung booking. Isipin mo kung anong detalye ang kailangan niyang makita para panatag siya, at wag ka nang gagawa ng bagay na hindi niya hiniling.',
             'options' => [
                 [
-                    'order' => 3,
+                    'order' => 2,
                     'body' => "Done, you're all booked. Outbound: 8:40am Manila–Cebu, lands 10:05am (₱3,850). Return: 6:30pm Cebu–Manila, lands 8:00pm (₱5,400). Confirmations are in your inbox. Have a great trip!",
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
                 ],
                 [
-                    'order' => 2,
+                    'order' => 3,
                     'body' => 'Great, booking it now!',
                     'is_correct' => false,
                     'diagnostic' => 'You confirmed you\'re booking but never closed the loop with the final details, leaving him unsure what was actually purchased.',

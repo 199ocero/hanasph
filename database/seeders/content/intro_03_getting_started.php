@@ -32,7 +32,7 @@ return [
             'tagalog_tip' => 'Ang kailangan ay praktikal lang: gumaganang computer, matatag na internet, at tahimik na lugar para makapag-focus. Hindi mamahaling gamit o diploma ang unang kailangan.',
             'options' => [
                 [
-                    'order' => 2,
+                    'order' => 1,
                     'body' => 'A reliable computer, a stable internet connection, and a quiet enough space to focus, plus the free communication tools clients use.',
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -61,7 +61,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 1,
+                    'order' => 2,
                     'body' => 'Nothing special at all, even a flaky phone-only connection that drops constantly is totally fine for client work.',
                     'is_correct' => false,
                     'diagnostic' => 'You don\'t need fancy gear, but an unreliable connection will fail you on deadlines and calls, so stability genuinely matters.',
@@ -80,14 +80,14 @@ return [
             'tagalog_tip' => 'Ang kakayahang makipag-ususing nang malinaw sa English, lalo na sa pagsulat, ang nagbubukas ng maraming pinto. Hindi kailangang perpekto, basta malinaw at maiintindihan.',
             'options' => [
                 [
-                    'order' => 3,
+                    'order' => 4,
                     'body' => 'Clear enough English, especially in writing, so I can understand instructions and reply to clients abroad without confusion.',
                     'is_correct' => true,
                     'diagnostic' => null,
                     'lesson' => null,
                 ],
                 [
-                    'order' => 4,
+                    'order' => 3,
                     'body' => "A perfect, accent-free American voice, if I don't sound like a native speaker, I shouldn't even try.",
                     'is_correct' => false,
                     'diagnostic' => 'Clients want to be understood, not impressed by an accent, so accent-free perfection is never the requirement.',
@@ -128,7 +128,7 @@ return [
             'tagalog_tip' => 'Lahat nagsimula sa wala. Ang tama ay magsimula kung nasaan ka na: mag-practice, gumawa ng maliit na patunay ng skills mo, at kunin ang unang pagkakataon, wag hintaying maging "handa na handa".',
             'options' => [
                 [
-                    'order' => 4,
+                    'order' => 2,
                     'body' => "Start where I am: practice the skills, put together a small sample of my work as proof, and apply for that first opportunity even while I'm still learning.",
                     'is_correct' => true,
                     'diagnostic' => null,
@@ -146,7 +146,7 @@ return [
                     ],
                 ],
                 [
-                    'order' => 2,
+                    'order' => 4,
                     'body' => 'Apply to hundreds of jobs today with a blank profile and no samples, since volume alone will surely land something.',
                     'is_correct' => false,
                     'diagnostic' => 'Mass-applying with nothing to show gets ignored, a little proof of your skills matters more than raw application count.',
