@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'difficult-stakeholder',
-    'order' => 21,
+    'order' => 17,
     'title' => 'The blunt reply',
     'client_persona' => "Dana, events coordinator at a restaurant (not your client; someone you're dealing with on Priya's behalf)",
     'scenario_intro' => 'Your client Priya is hosting a dinner for eight of her best customers and asked you to book a private room at a well-regarded restaurant. You emailed to enquire, and Dana, the events coordinator, is all business.',
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

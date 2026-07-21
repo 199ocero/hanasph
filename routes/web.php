@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttemptController;
 use App\Http\Controllers\FreeTextAttemptController;
 use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\ReflectionController;
 use App\Http\Controllers\SkillCourseController;
 use App\Http\Controllers\SkillLessonController;
 use App\Http\Controllers\SubmissionController;
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
             ->scopeBindings()
             ->middleware('throttle:20,1')
             ->name('tasks.beats.reply');
+        Route::post('tasks/{task}/reflection', [ReflectionController::class, 'store'])
+            ->name('tasks.reflection');
+
+        Route::get('reflections', [ReflectionController::class, 'index'])->name('reflections.index');
 
         Route::prefix('skills')->name('skills.')->group(function () {
             Route::get('/', [SkillCourseController::class, 'index'])->name('index');

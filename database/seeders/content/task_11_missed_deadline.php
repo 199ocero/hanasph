@@ -11,13 +11,14 @@
 
 return [
     'slug' => 'missed-deadline',
-    'order' => 14,
+    'order' => 11,
     'title' => "When you're going to be late",
     'client_persona' => 'Deepa, runs a small online course business',
     'scenario_intro' => "Deepa asked you to have the new lesson workbook formatted and back to her by end of day Wednesday. It's Tuesday afternoon and you can already tell it won't be ready in time.",
     'xp_reward' => 150,
     'onboarding_entry_key' => null,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'owning-a-mistake',
-    'order' => 23,
+    'order' => 21,
     'title' => 'You messed up. Now what?',
     'client_persona' => 'Bea, your main client, owner of an online boutique',
     'scenario_intro' => 'Bea trusts you with her weekly promo email. This week you had AI draft it, scheduled it to her full 4,000-person list, and it went out this morning. You never proofread the discount code.',
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

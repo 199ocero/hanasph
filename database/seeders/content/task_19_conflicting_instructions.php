@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'conflicting-instructions',
-    'order' => 22,
+    'order' => 19,
     'title' => 'Two bosses, two answers',
     'client_persona' => 'Elena and Rob, the two partners who own Bloom & Co',
     'scenario_intro' => 'You run social media for Bloom & Co, a small online plant shop with two owners. Yesterday Elena told you to publish the Black Friday sale post Monday at 9am, and you scheduled it. This morning, a different message lands.',
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

@@ -19,6 +19,8 @@ use Illuminate\Support\Carbon;
  * @property bool $had_wrong_attempt
  * @property Carbon|null $passed_at
  * @property bool $skipped
+ * @property string|null $reflection_note
+ * @property Carbon|null $reflected_at
  * @property-read User $user
  * @property-read Task $task
  */
@@ -31,6 +33,8 @@ use Illuminate\Support\Carbon;
     'had_wrong_attempt',
     'passed_at',
     'skipped',
+    'reflection_note',
+    'reflected_at',
 ])]
 class UserTaskProgress extends Model
 {
@@ -54,6 +58,7 @@ class UserTaskProgress extends Model
             'had_wrong_attempt' => 'boolean',
             'skipped' => 'boolean',
             'passed_at' => 'datetime',
+            'reflected_at' => 'datetime',
         ];
     }
 

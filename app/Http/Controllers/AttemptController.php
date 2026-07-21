@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\UserTaskProgress;
 use App\Services\Tasks\AttemptService;
 use App\Services\Tasks\ProgressionService;
+use App\Services\Tasks\ReflectionPromptResolver;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -57,6 +58,8 @@ class AttemptController extends Controller
             return redirect()->route('dashboard')->with('celebration', [
                 'title' => $task->title,
                 'xp' => $result['awardedXp'],
+                'taskSlug' => $task->slug,
+                'reflectionPrompt' => $task->is_intro ? null : (new ReflectionPromptResolver)->for($task),
             ]);
         }
 

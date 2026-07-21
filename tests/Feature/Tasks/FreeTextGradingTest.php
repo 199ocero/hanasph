@@ -76,7 +76,8 @@ it('passes the task, awards the first-try bonus, and unlocks the next task', fun
     reply($this->user, $this->task, beat($this->task, 1));
     reply($this->user, $this->task, beat($this->task, 2))
         ->assertRedirect(route('dashboard'))
-        ->assertSessionHas('celebration');
+        ->assertSessionHas('celebration', fn ($celebration) => $celebration['taskSlug'] === $this->task->slug
+            && $celebration['reflectionPrompt'] !== null);
 
     $progress = UserTaskProgress::where('user_id', $this->user->id)->where('task_id', $this->task->id)->first();
     expect($progress->status)->toBe(UserTaskProgress::STATUS_PASSED);

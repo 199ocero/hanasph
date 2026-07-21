@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'choosing-ai-tools',
-    'order' => 9,
+    'order' => 10,
     'title' => 'Which tools do I actually need?',
     'client_persona' => 'Rina runs a home-based bakery and is figuring out what to pay for',
     'scenario_intro' => "Rina bakes from home and sells through her social pages. She's heard AI can help but feels lost about what to actually subscribe to, and her budget is tight. She's trusting you to point her to what she really needs, without upselling her the whole store.",
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'ai',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

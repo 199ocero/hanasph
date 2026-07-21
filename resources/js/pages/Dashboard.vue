@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Head, usePage } from '@inertiajs/vue3';
 import { CheckCircle2, Flame, Zap } from '@lucide/vue';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import LevelBadge from '@/components/LevelBadge.vue';
+import ReflectionModal from '@/components/ReflectionModal.vue';
 import StatTile from '@/components/StatTile.vue';
 import StreakCounter from '@/components/StreakCounter.vue';
 import TrackMap from '@/components/TrackMap.vue';
@@ -17,6 +18,8 @@ const props = defineProps<{
     stats: TrackStats;
     celebration: Celebration | null;
 }>();
+
+const reflectionModalOpen = ref(false);
 
 defineOptions({
     layout: {
@@ -43,6 +46,10 @@ onMounted(() => {
             title: `Task passed: ${props.celebration.title}`,
             rarity: 'epic',
         });
+
+        if (props.celebration.reflectionPrompt) {
+            reflectionModalOpen.value = true;
+        }
     }
 });
 </script>
@@ -123,4 +130,11 @@ onMounted(() => {
             <TrackMap :nodes="nodes" />
         </div>
     </div>
+
+    <ReflectionModal
+        v-if="celebration?.reflectionPrompt"
+        v-model:open="reflectionModalOpen"
+        :prompt="celebration.reflectionPrompt"
+        :task-slug="celebration.taskSlug"
+    />
 </template>

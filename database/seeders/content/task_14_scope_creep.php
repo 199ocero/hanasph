@@ -11,13 +11,14 @@
 
 return [
     'slug' => 'scope-creep',
-    'order' => 17,
+    'order' => 13,
     'title' => 'Just one more thing',
     'client_persona' => 'Dan, runs an online supplements store',
     'scenario_intro' => "You told Dan the product descriptions he needs would be ready by 3pm today, and he's counting on them for a sale launch. Mid-morning, he messages.",
     'xp_reward' => 175,
     'onboarding_entry_key' => null,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

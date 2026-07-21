@@ -11,13 +11,14 @@
 
 return [
     'slug' => 'travel-booking',
-    'order' => 15,
+    'order' => 18,
     'title' => 'Book the trip',
     'client_persona' => 'Ken, a consultant travelling for work',
     'scenario_intro' => 'Ken has an important client meeting in Cebu and asks you to book his flights. He gives you his constraints in one quick message before jumping into a call.',
     'xp_reward' => 150,
     'onboarding_entry_key' => null,
     'category' => 'admin',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

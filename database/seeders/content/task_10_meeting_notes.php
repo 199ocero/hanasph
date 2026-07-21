@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'meeting-notes',
-    'order' => 13,
+    'order' => 12,
     'title' => 'Notes that actually help',
     'client_persona' => 'Sofia, founder of an early-stage startup',
     'scenario_intro' => 'Sofia just wrapped a 45-minute team planning call and asked you to write it up and send it round. You sat in and took notes the whole time.',
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'admin',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

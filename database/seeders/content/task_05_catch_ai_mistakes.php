@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => 'ai',
     'is_gentle_opener' => false,
     'category' => 'ai',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

@@ -64,7 +64,8 @@ it('passes the task, awards xp, and unlocks the next task on the final beat', fu
     $this->actingAs($this->user)->post(
         route('tasks.beats.attempt', ['task' => $this->task, 'beat' => beat($this->task, 2)]),
         ['option_id' => optionOf(beat($this->task, 2), 1)->id],
-    )->assertRedirect(route('dashboard'))->assertSessionHas('celebration');
+    )->assertRedirect(route('dashboard'))->assertSessionHas('celebration', fn ($celebration) => $celebration['taskSlug'] === $this->task->slug
+        && $celebration['reflectionPrompt'] !== null);
 
     $progress = UserTaskProgress::where('user_id', $this->user->id)->where('task_id', $this->task->id)->first();
     expect($progress->status)->toBe(UserTaskProgress::STATUS_PASSED)
@@ -102,4 +103,18 @@ it('withholds the first-try bonus after a wrong attempt', function () {
 
 it('forbids opening a locked task', function () {
     $this->actingAs($this->user)->get(route('tasks.show', $this->next))->assertForbidden();
+});
+
+it('omits the reflection prompt when passing an intro task', function () {
+    $intro = makeTask(order: 3, beats: 1, attributes: ['is_intro' => true]);
+
+    UserTaskProgress::factory()->unlocked()->create([
+        'user_id' => $this->user->id,
+        'task_id' => $intro->id,
+    ]);
+
+    $this->actingAs($this->user)->post(
+        route('tasks.beats.attempt', ['task' => $intro, 'beat' => beat($intro, 1)]),
+        ['option_id' => optionOf(beat($intro, 1), 1)->id],
+    )->assertSessionHas('celebration', fn ($celebration) => $celebration['reflectionPrompt'] === null);
 });

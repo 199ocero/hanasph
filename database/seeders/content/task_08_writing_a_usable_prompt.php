@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'writing-a-usable-prompt',
-    'order' => 11,
+    'order' => 16,
     'title' => 'Getting AI to do it right',
     'client_persona' => 'Dennis runs a small online gadget shop',
     'scenario_intro' => 'Dennis sells phone accessories online and just asked you to draft a promo email for his weekend sale. He wants something he can send to customers, not a rough sketch he has to fix.',
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'ai',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

@@ -18,6 +18,7 @@ return [
     'xp_reward' => 100,
     'onboarding_entry_key' => 'clients',
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

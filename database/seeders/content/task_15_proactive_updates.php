@@ -11,13 +11,14 @@
 
 return [
     'slug' => 'proactive-updates',
-    'order' => 18,
+    'order' => 15,
     'title' => 'Don’t go dark',
     'client_persona' => 'Priya, launching a course over the next four days',
     'scenario_intro' => "Priya hired you to build her course landing page by Friday. It's Tuesday, and the only thing blocking you is a designer who still hasn't sent the header image she promised.",
     'xp_reward' => 175,
     'onboarding_entry_key' => null,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

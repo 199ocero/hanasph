@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'one-clarifying-question',
-    'order' => 10,
+    'order' => 9,
     'title' => 'The one question worth asking',
     'client_persona' => 'Marco runs a small coffee shop and fires off requests in a hurry',
     'scenario_intro' => 'Marco owns a busy coffee shop and messages between orders, so his asks arrive short and vague. Guess wrong and you build the wrong thing. Ask too many questions and you turn into one more chore on his day. The trick is knowing the single question actually worth his time.',
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'comms',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

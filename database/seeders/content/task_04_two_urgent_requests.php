@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => 'overwhelm',
     'is_gentle_opener' => false,
     'category' => 'prioritization',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

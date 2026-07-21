@@ -11,13 +11,14 @@
 
 return [
     'slug' => 'when-not-to-use-ai',
-    'order' => 19,
+    'order' => 23,
     'title' => 'Put the AI down',
     'client_persona' => 'Ramon, runs a small accounting firm and trusts your judgment',
     'scenario_intro' => "You've been using AI to speed up Ramon's work all week and he loves it. Now he forwards you an email from Mrs. Santos, a long-time client whose husband just passed away.",
     'xp_reward' => 175,
     'onboarding_entry_key' => null,
     'category' => 'ai',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

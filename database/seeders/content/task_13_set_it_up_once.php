@@ -11,13 +11,14 @@
 
 return [
     'slug' => 'set-it-up-once',
-    'order' => 16,
+    'order' => 22,
     'title' => 'Stop doing it twice',
     'client_persona' => 'Rhea, runs a small online skincare shop',
     'scenario_intro' => "Every Friday Rhea asks you to pull the week's numbers from a few places and turn them into a tidy summary she can post to her team. You've done it by hand for a month now.",
     'xp_reward' => 175,
     'onboarding_entry_key' => null,
     'category' => 'ai',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

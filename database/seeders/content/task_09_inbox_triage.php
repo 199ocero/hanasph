@@ -11,7 +11,7 @@
 
 return [
     'slug' => 'inbox-triage',
-    'order' => 12,
+    'order' => 14,
     'title' => 'Taming the inbox',
     'client_persona' => 'Priya, founder of a growing skincare brand',
     'scenario_intro' => "Priya just gave you access to her shared support inbox and asked you to get it under control. The point of hiring you is so she doesn't have to live in there anymore.",
@@ -19,6 +19,7 @@ return [
     'onboarding_entry_key' => null,
     'is_gentle_opener' => false,
     'category' => 'prioritization',
+    'ai_grading_enabled' => true,
     'beats' => [
         [
             'order' => 1,

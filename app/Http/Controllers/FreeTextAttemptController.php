@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\UserTaskProgress;
 use App\Services\Tasks\FreeTextGradingService;
 use App\Services\Tasks\ProgressionService;
+use App\Services\Tasks\ReflectionPromptResolver;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -51,6 +52,8 @@ class FreeTextAttemptController extends Controller
             return redirect()->route('dashboard')->with('celebration', [
                 'title' => $task->title,
                 'xp' => $result['awardedXp'],
+                'taskSlug' => $task->slug,
+                'reflectionPrompt' => $task->is_intro ? null : (new ReflectionPromptResolver)->for($task),
             ]);
         }
 

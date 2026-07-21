@@ -26,6 +26,8 @@ export type TrackStats = {
 export type Celebration = {
     title: string;
     xp: number;
+    taskSlug: string;
+    reflectionPrompt: string | null;
 };
 
 export type PlayerOption = {

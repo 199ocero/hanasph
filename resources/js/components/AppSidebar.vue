@@ -5,6 +5,7 @@ import {
     ClipboardList,
     Headset,
     Megaphone,
+    NotebookPen,
     PenLine,
     Route,
     Shield,
@@ -37,6 +38,7 @@ import {
 } from '@/components/ui/sidebar';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { dashboard } from '@/routes';
+import reflectionRoutes from '@/routes/reflections';
 import type { NavItem } from '@/types';
 
 const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
@@ -66,6 +68,12 @@ const mainNavItems = computed<NavItem[]>(() => {
             icon: Route,
             isActive:
                 isCurrentUrl(dashboard()) || isCurrentOrParentUrl('/tasks'),
+        },
+        {
+            title: 'Reflections',
+            href: reflectionRoutes.index(),
+            icon: NotebookPen,
+            isActive: isCurrentUrl(reflectionRoutes.index()),
         },
     ];
 
